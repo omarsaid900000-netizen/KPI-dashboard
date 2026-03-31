@@ -173,9 +173,11 @@ select.period-select{padding:5px 10px;border:1px solid var(--border);border-radi
   <div class="period-section">
     <span class="period-label-txt">السنة:</span>
     <select class="period-select" id="sel-year" onchange="applyPeriod()">
+      <option value="2023">2023</option>
       <option value="2024">2024</option>
       <option value="2025" selected>2025</option>
       <option value="2026">2026</option>
+      <option value="2027">2027</option>
     </select>
   </div>
   <div class="period-divider"></div>
@@ -362,6 +364,22 @@ select.period-select{padding:5px 10px;border:1px solid var(--border);border-radi
       <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
         <button class="save-btn" onclick="saveTeam()">💾 حفظ الفريق</button>
         <button class="save-btn warn" onclick="resetTeam()">↺ إعادة تعيين</button>
+      </div>
+    </div>
+ 
+    <!-- KPI Fields Management -->
+    <div class="card">
+      <div class="card-title">
+        مؤشرات الأداء المُتتبَّعة
+        <span class="badge badge-blue" id="kpi-fields-count">4 مؤشرات</span>
+      </div>
+      <div class="hint hint-amber" style="margin-bottom:12px;">
+        ⚠️ تعديل أسماء المؤشرات بيأثر على جداول الإدخال والأهداف والتقارير. لا تحذف مؤشراً إلا لو متأكد.
+      </div>
+      <div id="kpi-fields-list"></div>
+      <button class="add-btn" onclick="addKpiField()" style="margin-top:8px;">+ إضافة مؤشر جديد</button>
+      <div style="margin-top:10px;">
+        <button class="save-btn" onclick="saveKpiFields()">💾 حفظ المؤشرات</button>
       </div>
     </div>
   </div>
@@ -785,6 +803,7 @@ function renderEntryTable(){
   const rows = team.map(r=>{
     const a = actuals[r.id]?.[yr]?.[m] || {};
     const t = targets[r.id]?.[yr]?.[m] || {};
+    const note = a.note || '';
     return `<tr>
       <td><div style="display:flex;align-items:center;gap:7px;">
         <div class="avatar" style="background:${r.color};width:26px;height:26px;font-size:10px;">${r.name.charAt(0)}</div>
@@ -793,13 +812,26 @@ function renderEntryTable(){
       ${FIELDS.map(f=>{
         const tval=t[f]||'';
         const aval=a[f]||'';
+        // color-code input vs target
+        let achStyle='';
+        if(aval && tval){
+          const p=Math.round(aval/tval*100);
+          achStyle = p>=90?'border-color:#1D9E75;background:#E1F5EE;':p>=70?'border-color:#E8A020;background:#FEF3E2;':'border-color:#D85A30;background:#FCEBEB;';
+        }
         return `<td>
-          <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">هدف: ${tval}</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">هدف: <strong>${tval||'—'}</strong></div>
           <input class="entry-input ${aval?'has-value':''}" type="number" placeholder="0"
             value="${aval}" data-rep="${r.id}" data-field="${f}"
+            style="${achStyle}"
             oninput="onEntryInput(this)">
         </td>`;
       }).join('')}
+      <td>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">ملاحظة</div>
+        <input type="text" class="entry-input" placeholder="اكتب ملاحظة..."
+          value="${esc(note)}" data-rep="${r.id}" data-field="note"
+          style="width:130px;font-size:11px;" oninput="onEntryInput(this)">
+      </td>
     </tr>`;
   }).join('');
  
@@ -808,6 +840,7 @@ function renderEntryTable(){
     <thead><tr>
       <th style="text-align:right;">المندوب</th>
       ${FIELDS.map(f=>`<th>${FIELD_LABELS[f]}</th>`).join('')}
+      <th>ملاحظات</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
@@ -819,16 +852,17 @@ function onEntryInput(inp){
  
 function saveActuals(){
   const yr=state.year, m=entryMonth;
-  document.querySelectorAll('.entry-input').forEach(inp=>{
+  document.querySelectorAll('#entry-table-wrap .entry-input').forEach(inp=>{
     const repId = inp.dataset.rep;
     const field  = inp.dataset.field;
-    const val    = +inp.value || 0;
+    if(!repId || !field) return;
     actuals[repId]       = actuals[repId]       || {};
     actuals[repId][yr]   = actuals[repId][yr]   || {};
     actuals[repId][yr][m]= actuals[repId][yr][m]|| {};
-    actuals[repId][yr][m][field] = val;
+    // note is text, others are numbers
+    actuals[repId][yr][m][field] = field==='note' ? inp.value : (+inp.value || 0);
   });
-  renderEntryMonthSelector(); // refresh ✓ badges
+  renderEntryMonthSelector();
   renderEntryTable();
   renderAll();
   showToast(`✅ تم حفظ بيانات ${MONTH_NAMES[m-1]} ${yr}`);
@@ -894,13 +928,29 @@ function saveTargets(){
 /* ══════════════════════════════════════════════
    CALCULATOR
    ══════════════════════════════════════════════ */
+let activeCalcIdx = -1; // track which member tab is selected
+ 
 function renderCalcTabs(){
-  document.getElementById('calc-member-tabs').innerHTML =
-    `<button style="background:#FEF3E2;border:1px solid #E8A020;color:#7a4f00;padding:5px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:700;" onclick="loadCalcMember(-1)">🏢 الفريق كله</button>` +
-    team.map((r,i)=>`<button style="background:#f3f4f6;border:1px solid var(--border);color:#555;padding:5px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;" onclick="loadCalcMember(${i})">${r.name}</button>`).join('');
+  const tabs = document.getElementById('calc-member-tabs');
+  if(!tabs) return;
+  // Build buttons with proper active state
+  const allBtns = [
+    {idx:-1, label:'🏢 الفريق كله', isTeam:true},
+    ...team.map((r,i)=>({idx:i, label:r.name, isTeam:false, color:r.color}))
+  ];
+  tabs.innerHTML = allBtns.map(b=>{
+    const isActive = b.idx === activeCalcIdx;
+    const base = b.isTeam
+      ? `background:${isActive?'#E8A020':'#FEF3E2'};border:1px solid #E8A020;color:${isActive?'#fff':'#7a4f00'};font-weight:700;`
+      : `background:${isActive?b.color:'#f3f4f6'};border:1px solid ${isActive?b.color:'var(--border)'};color:${isActive?'#fff':'#555'};${isActive?'font-weight:700;':''}`;
+    return `<button style="${base}padding:5px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;"
+      onclick="loadCalcMember(${b.idx})">${b.label}</button>`;
+  }).join('');
 }
  
 function loadCalcMember(idx){
+  activeCalcIdx = idx;
+  renderCalcTabs(); // re-render to update active highlight
   const m = monthsInPeriod();
   let a;
   if(idx===-1){
@@ -964,6 +1014,83 @@ function calcKPI(){
 }
  
 /* ══════════════════════════════════════════════
+   KPI FIELDS MANAGEMENT (Fix 3)
+   ══════════════════════════════════════════════ */
+// FIELDS and FIELD_LABELS are now mutable
+let kpiFields = [...FIELDS]; // copy
+let kpiLabels = {...FIELD_LABELS}; // copy
+// Keep FIELDS/FIELD_LABELS in sync
+function syncKpiFields(){ kpiFields.forEach((f,i)=>{ if(!kpiLabels[f]) kpiLabels[f]=f; }); }
+ 
+function renderKpiFieldsList(){
+  const el = document.getElementById('kpi-fields-list');
+  if(!el) return;
+  document.getElementById('kpi-fields-count').textContent = kpiFields.length+' مؤشرات';
+  el.innerHTML = kpiFields.map((f,i)=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8f9fc;border-radius:8px;margin-bottom:6px;border:1px solid var(--border);">
+      <div style="font-size:10px;color:var(--muted);width:30px;text-align:center;font-weight:700;">${i+1}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;">
+        <div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">مفتاح المؤشر (إنجليزي)</div>
+          <input class="field-input" type="text" value="${esc(f)}" placeholder="مثال: visits"
+            data-idx="${i}" data-type="key" onchange="updateKpiField(this)"
+            style="font-family:monospace;font-size:12px;">
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">الاسم العربي (يظهر في الجداول)</div>
+          <input class="field-input" type="text" value="${esc(kpiLabels[f]||f)}" placeholder="مثال: زيارات"
+            data-idx="${i}" data-type="label" onchange="updateKpiField(this)">
+        </div>
+      </div>
+      ${kpiFields.length>2?`<button class="remove-btn" onclick="removeKpiField(${i})" title="حذف المؤشر">✕</button>`:'<div style="width:28px;"></div>'}
+    </div>`).join('');
+}
+ 
+function updateKpiField(inp){
+  const i=+inp.dataset.idx;
+  if(inp.dataset.type==='key'){
+    const oldKey=kpiFields[i], newKey=inp.value.trim().replace(/\s+/g,'_');
+    if(newKey && newKey!==oldKey){
+      kpiLabels[newKey]=kpiLabels[oldKey]; delete kpiLabels[oldKey];
+      kpiFields[i]=newKey;
+    }
+  } else {
+    kpiLabels[kpiFields[i]]=inp.value;
+  }
+}
+ 
+function addKpiField(){
+  const key='field_'+(Date.now()%10000);
+  kpiFields.push(key);
+  kpiLabels[key]='مؤشر جديد';
+  renderKpiFieldsList();
+}
+ 
+function removeKpiField(i){
+  if(kpiFields.length<=2){showToast('❌ لازم يكون فيه مؤشرين على الأقل');return;}
+  if(!confirm('هتحذف المؤشر "'+kpiLabels[kpiFields[i]]+'" — البيانات المرتبطة به هتتشال من التقارير. متأكد؟')) return;
+  const key=kpiFields[i];
+  kpiFields.splice(i,1);
+  delete kpiLabels[key];
+  renderKpiFieldsList();
+}
+ 
+function saveKpiFields(){
+  // Read any pending input changes
+  document.querySelectorAll('#kpi-fields-list input[data-idx]').forEach(inp=> updateKpiField(inp));
+  // Sync global FIELDS array reference used everywhere
+  FIELDS.length=0; kpiFields.forEach(f=>FIELDS.push(f));
+  Object.keys(FIELD_LABELS).forEach(k=>delete FIELD_LABELS[k]);
+  Object.assign(FIELD_LABELS, kpiLabels);
+  renderAll();
+  renderKpiFieldsList();
+  // Re-render entry/targets if open
+  if(document.getElementById('tab-entry').classList.contains('active')) renderEntryTable();
+  if(document.getElementById('tab-targets').classList.contains('active')) renderTargetsTable();
+  showToast('✅ تم حفظ مؤشرات الأداء!');
+}
+ 
+/* ══════════════════════════════════════════════
    SETTINGS (team static info)
    ══════════════════════════════════════════════ */
 function renderMembersList(){
@@ -1023,12 +1150,15 @@ function showTab(tab, el){
   if(tab==='entry')    { renderEntryMonthSelector(); renderEntryTable(); }
   if(tab==='targets')    renderTargetsTable();
   if(tab==='calculator'){ renderCalcTabs(); calcKPI(); }
-  if(tab==='settings')   renderMembersList();
+  if(tab==='settings'){ renderMembersList(); renderKpiFieldsList(); }
 }
  
 /* ══════════════════════════════════════════════
    INIT
    ══════════════════════════════════════════════ */
+// Init kpiFields from FIELDS constants
+kpiFields = [...FIELDS];
+kpiLabels  = {...FIELD_LABELS};
 seedDefaults();
 renderDashboard();
 renderCalcTabs();
