@@ -12,14 +12,12 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#F0F4F8;direction
   --warn:#BA7517;--purple:#534AB7;--surface:#fff;--border:rgba(0,0,0,0.1);--muted:#6B7280;
 }
  
-/* ── HEADER ── */
 .header{background:var(--primary);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid var(--accent);position:sticky;top:0;z-index:200;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{width:38px;height:38px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;}
 .logo-text{font-size:15px;font-weight:700;}
 .logo-sub{font-size:10px;opacity:.7;margin-top:1px;}
  
-/* ── PERIOD BAR ── */
 .period-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .period-section{display:flex;align-items:center;gap:6px;}
 .period-divider{width:1px;height:24px;background:var(--border);margin:0 4px;}
@@ -30,19 +28,15 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#F0F4F8;direction
 .pbtn.compare-on{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75;}
 select.period-select{padding:5px 10px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;background:#f3f4f6;color:#444;cursor:pointer;}
 select.period-select:focus{outline:none;border-color:var(--primary);}
-.period-display{font-size:12px;font-weight:700;color:var(--primary);background:#EEF2FF;padding:5px 12px;border-radius:7px;margin-right:auto;}
  
-/* ── NAV ── */
 .nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
 .nav-item{padding:11px 15px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;}
 .nav-item.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:700;}
 .nav-item:hover{color:var(--primary);}
  
-/* ── CONTENT ── */
 .content{padding:18px 20px;max-width:1200px;margin:0 auto;}
 .section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:11px;}
  
-/* ── KPI CARDS ── */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:18px;}
 @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
 .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;position:relative;overflow:hidden;transition:box-shadow .2s;}
@@ -55,7 +49,6 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .kpi-sub{font-size:10px;color:#aaa;margin-top:3px;}
 .kpi-compare{font-size:10px;color:var(--purple);margin-top:2px;font-weight:600;}
  
-/* ── CARDS ── */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:14px;}
 .card-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 .badge{background:#EEF2FF;color:var(--purple);font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
@@ -63,12 +56,10 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .badge-red{background:#FCEBEB;color:#A32D2D;}
 .badge-amber{background:#FEF3E2;color:var(--warn);}
  
-/* ── GRID LAYOUTS ── */
 .two-col{display:grid;grid-template-columns:2fr 1fr;gap:14px;}
 .equal-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:800px){.two-col,.equal-col{grid-template-columns:1fr;}}
  
-/* ── BARS ── */
 .bar-bg{height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-top:4px;}
 .bar-fill{height:100%;border-radius:3px;transition:width .4s;}
 .funnel-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
@@ -87,7 +78,6 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .target-pct{font-size:12px;font-weight:800;width:42px;text-align:left;flex-shrink:0;}
 .target-vals{font-size:10px;color:var(--muted);width:95px;text-align:left;flex-shrink:0;}
  
-/* ── TEAM ── */
 .rep-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);}
 .rep-row:last-child{border-bottom:none;}
 .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;}
@@ -100,7 +90,6 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .team-table td:first-child{text-align:right;}
 .team-table tr:last-child td{border-bottom:none;}
  
-/* ── ACTIVITY ── */
 .activity-item{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
 .activity-item:last-child{border-bottom:none;}
 .activity-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0;}
@@ -128,6 +117,9 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .mtab.active{background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700;}
 .mtab.team-total{background:var(--accent);color:#fff;border-color:var(--accent);}
  
+/* ── PERIOD BADGE in calc ── */
+.period-notice{background:#FEF3E2;border:1px solid #E8A020;border-radius:8px;padding:8px 12px;font-size:11px;color:#7a4f00;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+ 
 /* ── TEAM MANAGEMENT ── */
 .team-mgmt{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:14px;}
 .member-card{display:flex;align-items:center;gap:10px;padding:9px;background:#f8f9fc;border-radius:9px;margin-bottom:8px;border:1px solid var(--border);}
@@ -135,24 +127,27 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
 .member-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex:1;}
 .member-inputs input{padding:6px 9px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;background:#fff;color:#1a1a2e;width:100%;}
 .member-inputs input:focus{outline:none;border-color:var(--primary);}
-.color-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;cursor:pointer;}
+.color-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;cursor:pointer;border:2px solid rgba(0,0,0,0.15);}
 .remove-btn{background:#FCEBEB;border:none;color:#A32D2D;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .remove-btn:hover{background:#f7c1c1;}
 .add-member-btn{background:#E1F5EE;border:1px dashed #1D9E75;color:#0F6E56;padding:8px;border-radius:9px;width:100%;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700;margin-top:8px;transition:background .15s;}
 .add-member-btn:hover{background:#9FE1CB30;}
 .save-team-btn{background:var(--primary);border:none;color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-family:inherit;font-weight:700;cursor:pointer;margin-top:10px;}
 .save-team-btn:hover{background:#0a3a65;}
+.settings-hint{background:#E8F4FD;border:1px solid #90CAF9;border-radius:8px;padding:10px 14px;font-size:11px;color:#0a3a65;margin-bottom:14px;line-height:1.8;}
+ 
+/* ── TOAST NOTIFICATION ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a2e;color:#fff;padding:10px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:9999;transition:transform .3s ease;pointer-events:none;border-right:4px solid var(--accent);}
+.toast.show{transform:translateX(-50%) translateY(0);}
  
 .tab-content{display:none;}
 .tab-content.active{display:block;}
- 
-/* ── COMPARE BADGE ── */
-.cmp-val{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700;margin-right:4px;}
-.cmp-up{background:#E1F5EE;color:#0F6E56;}
-.cmp-down{background:#FCEBEB;color:#A32D2D;}
 </style>
 </head>
 <body>
+ 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
  
 <!-- HEADER -->
 <div class="header">
@@ -231,11 +226,7 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
       </div>
       <div class="card">
         <div class="card-title">آخر الأنشطة</div>
-        <div class="activity-item"><div class="activity-dot" style="background:#1D9E75;"></div><div class="activity-text">أحمد حسن أغلق صفقة مع شركة الفاروق للمقاولات — 45,000 جنيه</div><div class="activity-time">منذ ساعة</div></div>
-        <div class="activity-item"><div class="activity-dot" style="background:#0F4C81;"></div><div class="activity-text">سارة محمد أرسلت 3 عروض أسعار لعملاء B2B محتملين</div><div class="activity-time">منذ 3 ساعات</div></div>
-        <div class="activity-item"><div class="activity-dot" style="background:#E8A020;"></div><div class="activity-text">خالد عبدالله زار 5 عملاء في منطقة مدينة نصر</div><div class="activity-time">أمس</div></div>
-        <div class="activity-item"><div class="activity-dot" style="background:#D85A30;"></div><div class="activity-text">رُفض عرض سعر لشركة النيل للتجارة — السبب: السعر</div><div class="activity-time">أمس</div></div>
-        <div class="activity-item"><div class="activity-dot" style="background:#534AB7;"></div><div class="activity-text">محمد علي جدد عقد شركة الأهرام للاستيراد — 60,000 جنيه</div><div class="activity-time">منذ يومين</div></div>
+        <div id="activity-feed"></div>
       </div>
     </div>
   </div>
@@ -255,18 +246,7 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
     </div>
     <div class="card">
       <div class="card-title">توزيع الصفقات حسب القيمة <span class="badge-amber badge">بالجنيه المصري</span></div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px;">
-        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#0F4C81;">8</div><div style="font-size:10px;color:var(--muted);">أقل من 10K</div></div>
-        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#1D9E75;">15</div><div style="font-size:10px;color:var(--muted);">10K – 25K</div></div>
-        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#E8A020;">12</div><div style="font-size:10px;color:var(--muted);">25K – 50K</div></div>
-        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#D85A30;">5</div><div style="font-size:10px;color:var(--muted);">50K – 100K</div></div>
-        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#534AB7;">3</div><div style="font-size:10px;color:var(--muted);">أكثر من 100K</div></div>
-      </div>
-      <div style="margin-top:11px;height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden;display:flex;">
-        <div style="width:19%;background:#0F4C81;"></div><div style="width:35%;background:#1D9E75;"></div>
-        <div style="width:28%;background:#E8A020;"></div><div style="width:12%;background:#D85A30;"></div>
-        <div style="width:7%;background:#534AB7;"></div>
-      </div>
+      <div id="deal-dist" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px;"></div>
     </div>
   </div>
  
@@ -289,19 +269,11 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
     <div class="equal-col" style="margin-top:14px;">
       <div class="card">
         <div class="card-title">يحتاج تدخل <span class="badge badge-red">منطقة حمراء</span></div>
-        <div style="font-size:13px;line-height:2.2;">
-          <div style="color:var(--danger);">⚠ معدل التحويل: 12.5% (هدف: 15%)</div>
-          <div style="color:var(--danger);">⚠ عروض الأسعار: 67 (هدف: 80)</div>
-          <div style="color:var(--warn);">◑ متوسط الفاتورة: 18,400 (هدف: 20,000)</div>
-        </div>
+        <div id="red-zone" style="font-size:13px;line-height:2.2;"></div>
       </div>
       <div class="card">
         <div class="card-title">يسير بشكل جيد <span class="badge badge-green">منطقة خضراء</span></div>
-        <div style="font-size:13px;line-height:2.2;">
-          <div style="color:var(--success);">✔ عدد الزيارات: 184 (92%)</div>
-          <div style="color:var(--success);">✔ عملاء جدد: 23 (92%)</div>
-          <div style="color:var(--success);">✔ الاحتفاظ بالعملاء: 87%</div>
-        </div>
+        <div id="green-zone" style="font-size:13px;line-height:2.2;"></div>
       </div>
     </div>
   </div>
@@ -309,6 +281,11 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
   <!-- CALCULATOR -->
   <div class="tab-content" id="tab-calculator">
     <div class="section-title">حاسبة KPI الذكية — مخصصة لكل عضو</div>
+ 
+    <!-- FIX: Period notice so user knows which period the calculator reflects -->
+    <div class="period-notice" id="calc-period-notice">
+      📅 الحاسبة تعرض أرقام الفترة: <strong id="calc-period-label-text">يناير 2025</strong> — عدّل الفترة من الشريط العلوي وسيتم تحديث الأرقام تلقائياً
+    </div>
  
     <div class="card" style="margin-bottom:14px;">
       <div class="card-title">اختر المندوب أو احسب للفريق كله</div>
@@ -332,7 +309,7 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
         <div class="calc-grid">
           <div class="input-block"><label>متوسط قيمة الفاتورة (جنيه)</label><input type="number" id="c-avg" value="18000" oninput="calcKPI()"></div>
           <div class="input-block"><label>إجمالي عملاء موجودين</label><input type="number" id="c-existing" value="42" oninput="calcKPI()"></div>
-          <div class="input-block"><label>الهدف الشهري للإيرادات (جنيه)</label><input type="number" id="c-rev-target" value="250000" oninput="calcKPI()"></div>
+          <div class="input-block"><label>الهدف للإيرادات (جنيه)</label><input type="number" id="c-rev-target" value="250000" oninput="calcKPI()"></div>
         </div>
       </div>
  
@@ -355,8 +332,18 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
   <!-- SETTINGS / TEAM MANAGEMENT -->
   <div class="tab-content" id="tab-settings">
     <div class="section-title">إعدادات الفريق — إضافة وتعديل وحذف المندوبين</div>
+ 
+    <!-- FIX: Clear instruction to user -->
+    <div class="settings-hint">
+      ℹ️ <strong>تعليمات:</strong> عدّل بيانات المندوبين ثم اضغط <strong>"حفظ الفريق"</strong> — سيتم تحديث لوحة القيادة وقمع المبيعات وجدول الأداء والحاسبة كلها تلقائياً.<br>
+      الأرقام في الحقول دي هي الأرقام الشهرية الأساسية — المنصة بتضربها في معامل الفترة تلقائياً.
+    </div>
+ 
     <div class="team-mgmt">
       <div class="card-title" style="margin-bottom:12px;">أعضاء الفريق <span class="badge" id="settings-count">5 أعضاء</span></div>
+      <div style="display:grid;grid-template-columns:16px 2fr 2fr 80px 80px 80px 90px 30px;gap:6px;padding:0 6px 6px;font-size:10px;font-weight:700;color:var(--muted);">
+        <span></span><span>الاسم</span><span>المسمى الوظيفي</span><span>زيارات/شهر</span><span>عروض/شهر</span><span>صفقات/شهر</span><span>إيرادات/شهر</span><span></span>
+      </div>
       <div id="members-list"></div>
       <button class="add-member-btn" onclick="addMember()">+ إضافة مندوب جديد</button>
       <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
@@ -365,7 +352,7 @@ select.period-select:focus{outline:none;border-color:var(--primary);}
       </div>
     </div>
     <div class="card" style="margin-top:14px;">
-      <div class="card-title">أهداف الفريق — يمكن تعديلها</div>
+      <div class="card-title">أهداف الفريق الشهرية — يمكن تعديلها</div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="target-inputs"></div>
       <button class="save-team-btn" style="margin-top:12px;" onclick="saveTargets()">💾 حفظ الأهداف</button>
     </div>
@@ -380,20 +367,24 @@ const MONTH_NAMES = ['يناير','فبراير','مارس','أبريل','ماي
 const QTR_NAMES = ['Q1 (يناير–مارس)','Q2 (أبريل–يونيو)','Q3 (يوليو–سبتمبر)','Q4 (أكتوبر–ديسمبر)'];
  
 let state = {
-  mode: 'month', // month | quarter | year
+  mode: 'month',
   year: 2025,
   month: 1,
   quarter: 1,
   compare: false,
 };
  
+// ── FIX: team is the single source of truth — all sections read from here
 let team = [
-  { name:'أحمد حسن',   role:'B2B Account Executive', color:'#0F4C81', visits:48, proposals:18, deals:6, revenue:112000 },
-  { name:'سارة محمد',  role:'Senior Sales Rep',       color:'#1D9E75', visits:42, proposals:15, deals:5, revenue:94000 },
-  { name:'خالد عبدالله',role:'Sales Rep',              color:'#E8A020', visits:36, proposals:14, deals:4, revenue:76000 },
-  { name:'محمد علي',   role:'Account Manager',        color:'#534AB7', visits:30, proposals:11, deals:5, revenue:90000 },
-  { name:'نور إبراهيم', role:'Junior Sales Rep',       color:'#D85A30', visits:28, proposals:9,  deals:3, revenue:51000 },
+  { name:'أحمد حسن',    role:'B2B Account Executive', color:'#0F4C81', visits:48, proposals:18, deals:6,  revenue:112000 },
+  { name:'سارة محمد',   role:'Senior Sales Rep',       color:'#1D9E75', visits:42, proposals:15, deals:5,  revenue:94000  },
+  { name:'خالد عبدالله', role:'Sales Rep',              color:'#E8A020', visits:36, proposals:14, deals:4,  revenue:76000  },
+  { name:'محمد علي',    role:'Account Manager',        color:'#534AB7', visits:30, proposals:11, deals:5,  revenue:90000  },
+  { name:'نور إبراهيم',  role:'Junior Sales Rep',       color:'#D85A30', visits:28, proposals:9,  deals:3,  revenue:51000  },
 ];
+ 
+// FIX: defaultTeam for reset
+const defaultTeam = JSON.parse(JSON.stringify(team));
  
 let targets = {
   visits:200, newClients:25, revenue:500000, avgInvoice:20000,
@@ -401,6 +392,14 @@ let targets = {
 };
  
 let calcMember = -1; // -1 = team total
+ 
+/* ─────────────── TOAST ─────────────── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2800);
+}
  
 /* ─────────────── PERIOD LOGIC ─────────────── */
 function getPeriodLabel(){
@@ -437,21 +436,45 @@ function applyPeriod(){
   state.year = +document.getElementById('sel-year').value;
   const lbl = getPeriodLabel();
   document.getElementById('period-display-header').textContent = lbl;
-  ['dash','funnel','team','targets'].forEach(id=>{
+ 
+  // Update all section labels
+  const labelMap = {
+    'dash': 'المؤشرات الرئيسية — ',
+    'funnel': 'قمع المبيعات B2B — ',
+    'team': 'أداء الفريق الفردي — ',
+    'targets': 'الأهداف مقابل الإنجاز — '
+  };
+  Object.entries(labelMap).forEach(([id, prefix])=>{
     const el = document.getElementById(id+'-period-label');
-    if(el) el.textContent = (
-      id==='dash' ? 'المؤشرات الرئيسية — ' :
-      id==='funnel' ? 'قمع المبيعات B2B — ' :
-      id==='team' ? 'أداء الفريق الفردي — ' :
-      'الأهداف مقابل الإنجاز — '
-    ) + lbl;
+    if(el) el.textContent = prefix + lbl;
   });
-  // re-render active sections with slight variance per period
+ 
+  // FIX: Update calculator period notice
+  const calcLabel = document.getElementById('calc-period-label-text');
+  if(calcLabel) calcLabel.textContent = lbl;
+ 
+  // FIX: Update calc days hint based on period
+  const daysInput = document.getElementById('c-days');
+  if(daysInput){
+    if(state.mode==='year') daysInput.value = 365;
+    else if(state.mode==='quarter') daysInput.value = 90;
+    else {
+      const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+      daysInput.value = daysInMonth[(state.month-1)] || 30;
+    }
+  }
+ 
   renderDashKPIs();
   renderTeamMini();
   renderTeamFull();
   renderFunnel();
   renderTargets();
+  renderActivityFeed();
+ 
+  // FIX: If calculator is showing a member, refresh its inputs with new period data
+  if(document.getElementById('tab-calculator').classList.contains('active')){
+    selectCalcMember(calcMember, document.querySelector('.mtab.active'));
+  }
 }
  
 function toggleCompare(){
@@ -462,11 +485,10 @@ function toggleCompare(){
   renderDashKPIs();
 }
  
-/* Period multiplier — adds realistic variance */
+/* Period multiplier */
 function periodMult(){
   if(state.mode==='quarter') return 3;
   if(state.mode==='year') return 12;
-  // month seasonality
   const mults = [1,0.85,0.95,1.05,1.1,0.9,0.8,0.85,1.0,1.1,1.15,0.95];
   return mults[(state.month-1)];
 }
@@ -484,50 +506,80 @@ function prevLabel(){
   return 'سنة '+(state.year-1);
 }
  
-/* ─────────────── DASHBOARD KPIs ─────────────── */
-const BASE = {visits:184, newClients:23, avgInvoice:18400, convRate:12.5, revenue:423000, retention:87, proposals:67, saleCycle:32};
- 
-function scaledKPIs(){
-  const m = periodMult();
-  const noise = ()=> 1 + (Math.random()-0.5)*0.08;
-  return {
-    visits: Math.round(BASE.visits * m * noise()),
-    newClients: Math.round(BASE.newClients * m * noise()),
-    avgInvoice: Math.round(BASE.avgInvoice * noise() / 100)*100,
-    convRate: +(BASE.convRate * noise()).toFixed(1),
-    revenue: Math.round(BASE.revenue * m * noise() / 1000)*1000,
-    retention: Math.min(99, +(BASE.retention * noise()).toFixed(1)),
-    proposals: Math.round(BASE.proposals * m * noise()),
-    saleCycle: Math.round(BASE.saleCycle * noise()),
-  };
+/* ─────────────── TEAM TOTALS HELPER ─────────────── */
+// FIX: Always compute totals from the live `team` array, scaled by periodMult
+function getTeamTotals(mult){
+  const m = mult !== undefined ? mult : periodMult();
+  return team.reduce((acc, r)=>({
+    visits:    acc.visits    + Math.round(r.visits    * m),
+    proposals: acc.proposals + Math.round(r.proposals * m),
+    deals:     acc.deals     + Math.round(r.deals     * m),
+    revenue:   acc.revenue   + Math.round(r.revenue   * m),
+  }), {visits:0, proposals:0, deals:0, revenue:0});
 }
  
+/* ─────────────── DASHBOARD KPIs ─────────────── */
 function renderDashKPIs(){
-  const cur = scaledKPIs();
-  const prev = {visits:Math.round(cur.visits*0.88), newClients:Math.round(cur.newClients*0.92),
-    avgInvoice:Math.round(cur.avgInvoice*0.95), convRate:+(cur.convRate*1.02).toFixed(1),
-    revenue:Math.round(cur.revenue*0.91), retention:+(cur.retention*0.99).toFixed(1),
-    proposals:Math.round(cur.proposals*0.97), saleCycle:Math.round(cur.saleCycle*1.1)};
+  const m = periodMult();
+  const tot = getTeamTotals(m);
+ 
+  // Derive KPIs from actual team data (with small noise for realism)
+  const noise = ()=> 1 + (Math.random()-0.5)*0.04;
+  const convRate = tot.visits ? +(tot.deals / tot.visits * 100 * noise()).toFixed(1) : 0;
+  const proposals = tot.proposals;
+  const revenue = tot.revenue;
+  const avgInvoice = tot.deals ? Math.round(revenue / tot.deals) : 0;
+  const retention = Math.min(99, Math.round(87 * noise() * (m > 1 ? 1 : 1)));
+  const saleCycle = Math.round(32 * noise());
+ 
+  // Estimated new clients ~ 60% of deals (new vs renewal mix)
+  const newClients = Math.round(tot.deals * 0.65);
+ 
+  const cur = { visits: tot.visits, newClients, avgInvoice, convRate, revenue, retention, proposals, saleCycle };
+  const prev = {
+    visits:      Math.round(cur.visits      * 0.88),
+    newClients:  Math.round(cur.newClients  * 0.92),
+    avgInvoice:  Math.round(cur.avgInvoice  * 0.95),
+    convRate:    +(cur.convRate * 1.02).toFixed(1),
+    revenue:     Math.round(cur.revenue     * 0.91),
+    retention:   +(cur.retention * 0.99).toFixed(1),
+    proposals:   Math.round(cur.proposals   * 0.97),
+    saleCycle:   Math.round(cur.saleCycle   * 1.1)
+  };
+ 
   const lbl = getPeriodLabel();
   const prevLbl = prevLabel();
  
+  // FIX: targets are scaled by periodMult for fair comparison
+  const tm = periodMult();
+  const scaledTargets = {
+    visits:    Math.round(targets.visits    * tm),
+    newClients:Math.round(targets.newClients* tm),
+    revenue:   Math.round(targets.revenue   * tm),
+    avgInvoice: targets.avgInvoice, // per-deal metric, no scaling
+    convRate:   targets.convRate,
+    proposals:  Math.round(targets.proposals* tm),
+    retention:  targets.retention,
+    saleCycle:  targets.saleCycle,
+  };
+ 
   const cards = [
-    {label:'عدد الزيارات الميدانية', val:cur.visits.toLocaleString(), sub:'هدف: '+targets.visits, cc:'#0F4C81',
-      change: pctChange(cur.visits,prev.visits), prevVal:prev.visits, key:'visits'},
-    {label:'عدد العملاء الجدد', val:cur.newClients, sub:'هدف: '+targets.newClients, cc:'#1D9E75',
-      change: pctChange(cur.newClients,prev.newClients), prevVal:prev.newClients, key:'newClients'},
-    {label:'متوسط قيمة الفاتورة', val:cur.avgInvoice.toLocaleString()+' ج', sub:'هدف: '+targets.avgInvoice.toLocaleString(), cc:'#E8A020',
-      change: pctChange(cur.avgInvoice,prev.avgInvoice), prevVal:prev.avgInvoice.toLocaleString()+' ج', key:'avgInvoice'},
+    {label:'عدد الزيارات الميدانية', val:cur.visits.toLocaleString(), sub:'هدف: '+scaledTargets.visits.toLocaleString(), cc:'#0F4C81',
+      change: pctChange(cur.visits,prev.visits), prevVal:prev.visits},
+    {label:'عدد العملاء الجدد', val:cur.newClients, sub:'هدف: '+scaledTargets.newClients, cc:'#1D9E75',
+      change: pctChange(cur.newClients,prev.newClients), prevVal:prev.newClients},
+    {label:'متوسط قيمة الفاتورة', val:cur.avgInvoice.toLocaleString()+' ج', sub:'هدف: '+scaledTargets.avgInvoice.toLocaleString(), cc:'#E8A020',
+      change: pctChange(cur.avgInvoice,prev.avgInvoice), prevVal:prev.avgInvoice.toLocaleString()+' ج'},
     {label:'معدل التحويل الإجمالي', val:cur.convRate+'%', sub:'زيارة → عقد', cc:'#D85A30',
-      change: pctChange(cur.convRate,prev.convRate), prevVal:prev.convRate+'%', key:'convRate', reverseGood:false},
+      change: pctChange(cur.convRate,prev.convRate), prevVal:prev.convRate+'%'},
     {label:'متوسط دورة البيع', val:cur.saleCycle+' يوم', sub:'من أول تواصل → عقد', cc:'#534AB7',
-      change: pctChange(prev.saleCycle,cur.saleCycle), prevVal:prev.saleCycle+' يوم', key:'saleCycle', reverseGood:true},
-    {label:'إجمالي الإيرادات', val:cur.revenue.toLocaleString()+' ج', sub:'هدف: '+targets.revenue.toLocaleString(), cc:'#0F6E56',
-      change: pctChange(cur.revenue,prev.revenue), prevVal:(prev.revenue/1000).toFixed(0)+'K', key:'revenue'},
+      change: pctChange(prev.saleCycle,cur.saleCycle), prevVal:prev.saleCycle+' يوم', reverseGood:true},
+    {label:'إجمالي الإيرادات', val:cur.revenue.toLocaleString()+' ج', sub:'هدف: '+scaledTargets.revenue.toLocaleString(), cc:'#0F6E56',
+      change: pctChange(cur.revenue,prev.revenue), prevVal:(prev.revenue/1000).toFixed(0)+'K'},
     {label:'معدل الاحتفاظ بالعملاء', val:cur.retention+'%', sub:'العملاء المجددين', cc:'#993C1D',
-      change: pctChange(cur.retention,prev.retention), prevVal:prev.retention+'%', key:'retention'},
-    {label:'عروض الأسعار المُرسلة', val:cur.proposals, sub:'Win Rate: '+Math.round(cur.newClients/cur.proposals*100)+'%', cc:'#185FA5',
-      change: pctChange(cur.proposals,prev.proposals), prevVal:prev.proposals, key:'proposals'},
+      change: pctChange(cur.retention,prev.retention), prevVal:prev.retention+'%'},
+    {label:'عروض الأسعار المُرسلة', val:cur.proposals.toLocaleString(), sub:'Win Rate: '+(proposals?Math.round(cur.newClients/proposals*100):0)+'%', cc:'#185FA5',
+      change: pctChange(cur.proposals,prev.proposals), prevVal:prev.proposals},
   ];
  
   const grid = document.getElementById('kpi-grid');
@@ -535,7 +587,7 @@ function renderDashKPIs(){
     const isUp = c.change >= 0;
     const goodUp = !c.reverseGood;
     const isGood = goodUp ? isUp : !isUp;
-    const changeHtml = `<div class="kpi-change ${isGood?'up':'down'}">${isUp?'▲':'▼'} ${Math.abs(c.change)}% ${state.compare?'عن '+prevLbl:''}</div>`;
+    const changeHtml = `<div class="kpi-change ${isGood?'up':'down'}">${isUp?'▲':'▼'} ${Math.abs(c.change)}%${state.compare?' عن '+prevLbl:''}</div>`;
     const compareHtml = state.compare ? `<div class="kpi-compare">الفترة السابقة: ${c.prevVal}</div>` : '';
     return `<div class="kpi-card" style="--cc:${c.cc};">
       <div class="kpi-label">${c.label}</div>
@@ -554,6 +606,29 @@ function pctChange(cur, prev){
   return Math.round((cur-prev)/prev*100);
 }
  
+/* ─────────────── ACTIVITY FEED ─────────────── */
+function renderActivityFeed(){
+  const el = document.getElementById('activity-feed');
+  if(!el) return;
+  // Always show the first team member's name dynamically
+  const top = team[0] || {name:'المندوب الأول', color:'#0F4C81'};
+  const sec = team[1] || {name:'المندوب الثاني', color:'#1D9E75'};
+  const thr = team[2] || {name:'المندوب الثالث', color:'#E8A020'};
+  const activities = [
+    {color:top.color, text:`${top.name} أغلق صفقة مع شركة الفاروق للمقاولات — 45,000 ج`, time:'منذ ساعة'},
+    {color:sec.color, text:`${sec.name} أرسل 3 عروض أسعار لعملاء B2B محتملين`, time:'منذ 3 ساعات'},
+    {color:thr.color, text:`${thr.name} زار 5 عملاء في منطقة مدينة نصر`, time:'أمس'},
+    {color:'#D85A30', text:`رُفض عرض سعر لشركة النيل للتجارة — السبب: السعر`, time:'أمس'},
+    {color:team[3]?team[3].color:'#534AB7', text:`${team[3]?team[3].name:'محمد'} جدد عقد شركة الأهرام للاستيراد — 60,000 ج`, time:'منذ يومين'},
+  ];
+  el.innerHTML = activities.map(a=>`
+    <div class="activity-item">
+      <div class="activity-dot" style="background:${a.color};"></div>
+      <div class="activity-text">${a.text}</div>
+      <div class="activity-time">${a.time}</div>
+    </div>`).join('');
+}
+ 
 /* ─────────────── TEAM MINI ─────────────── */
 function renderTeamMini(){
   const el = document.getElementById('team-mini');
@@ -561,14 +636,15 @@ function renderTeamMini(){
   if(!el) return;
   const m = periodMult();
   badge.textContent = team.length + ' مندوبين';
-  const maxRev = Math.max(...team.map(r=>r.revenue));
+  const maxRev = Math.max(...team.map(r=> r.revenue * m));
   el.innerHTML = team.map(r=>{
     const rev = Math.round(r.revenue * m / 1000);
+    const barPct = Math.round(r.revenue * m / maxRev * 100);
     return `<div class="rep-row">
       <div class="avatar" style="background:${r.color};">${r.name.charAt(0)}</div>
       <div style="flex:1;">
         <div class="rep-name">${r.name}</div>
-        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(r.revenue/maxRev*100)}%;background:${r.color};"></div></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:${barPct}%;background:${r.color};"></div></div>
       </div>
       <div style="font-size:12px;font-weight:800;color:${r.color};min-width:52px;text-align:left;">${rev}K</div>
     </div>`;
@@ -578,19 +654,31 @@ function renderTeamMini(){
 /* ─────────────── TEAM FULL ─────────────── */
 function renderTeamFull(){
   const el = document.getElementById('team-full');
+  const badge = document.getElementById('team-full-badge');
   if(!el) return;
   const m = periodMult();
+  if(badge) badge.textContent = 'B2B Sales Team — '+team.length+' أعضاء';
+ 
+  // Sort by revenue descending for ranking
+  const sorted = [...team].map((r,i)=>({...r, origIdx:i}))
+    .sort((a,b)=> (b.revenue*m) - (a.revenue*m));
+ 
   el.innerHTML = `<table class="team-table">
     <thead><tr>
-      <th>المندوب</th><th>زيارات</th><th>عروض</th><th>صفقات</th><th>تحويل%</th><th>Win Rate</th><th>إيرادات (K)</th>
+      <th>#</th><th style="text-align:right;">المندوب</th><th>زيارات</th><th>عروض</th><th>صفقات</th><th>تحويل%</th><th>Win Rate</th><th>إيرادات (K)</th>
     </tr></thead>
     <tbody>
-    ${team.map(r=>{
-      const v=Math.round(r.visits*m), p=Math.round(r.proposals*m), d=Math.round(r.deals*m);
-      const rev=Math.round(r.revenue*m/1000);
-      const conv=v?Math.round(d/v*100):0, win=p?Math.round(d/p*100):0;
-      const cc=conv>=12?'var(--success)':conv>=8?'var(--warn)':'var(--danger)';
+    ${sorted.map((r,rank)=>{
+      const v = Math.round(r.visits*m);
+      const p = Math.round(r.proposals*m);
+      const d = Math.round(r.deals*m);
+      const rev = Math.round(r.revenue*m/1000);
+      const conv = v ? Math.round(d/v*100) : 0;
+      const win  = p ? Math.round(d/p*100) : 0;
+      const cc = conv>=12 ? 'var(--success)' : conv>=8 ? 'var(--warn)' : 'var(--danger)';
+      const medals = ['🥇','🥈','🥉'];
       return `<tr>
+        <td style="font-size:16px;">${medals[rank]||rank+1}</td>
         <td><div style="display:flex;align-items:center;gap:8px;">
           <div class="avatar" style="background:${r.color};width:30px;height:30px;font-size:11px;">${r.name.charAt(0)}</div>
           <div><div style="font-weight:700;font-size:12px;">${r.name}</div><div style="font-size:10px;color:var(--muted);">${r.role}</div></div>
@@ -608,72 +696,121 @@ function renderTeamFull(){
 function renderFunnel(){
   const el = document.getElementById('funnel-bars');
   const cr = document.getElementById('conv-rates');
+  const dd = document.getElementById('deal-dist');
   if(!el) return;
+ 
   const m = periodMult();
+  // FIX: Funnel now derives from actual team data
+  const tot = getTeamTotals(m);
+ 
+  // Build funnel from team actuals upward — visits are known, leads estimated at ~4.6x visits
+  const leads     = Math.round(tot.visits * 4.6);
+  const contacted = Math.round(tot.visits * 2.3);
+  const visited   = tot.visits;
+  const proposed  = tot.proposals;
+  const negotiated= Math.round(tot.deals * 1.5);
+  const closed    = tot.deals;
+ 
   const fd = [
-    { stage:'عملاء محتملون',  n:Math.round(850*m), color:'#0F4C81' },
-    { stage:'تم التواصل',     n:Math.round(420*m), color:'#185FA5' },
-    { stage:'زيارة / اجتماع', n:Math.round(184*m), color:'#1D9E75' },
-    { stage:'عرض سعر',        n:Math.round(67*m),  color:'#E8A020' },
-    { stage:'تفاوض',          n:Math.round(34*m),  color:'#D85A30' },
-    { stage:'صفقة مغلقة',     n:Math.round(23*m),  color:'#534AB7' },
+    { stage:'عملاء محتملون',  n: leads,      color:'#0F4C81' },
+    { stage:'تم التواصل',     n: contacted,  color:'#185FA5' },
+    { stage:'زيارة / اجتماع', n: visited,    color:'#1D9E75' },
+    { stage:'عرض سعر',        n: proposed,   color:'#E8A020' },
+    { stage:'تفاوض',          n: negotiated, color:'#D85A30' },
+    { stage:'صفقة مغلقة',     n: closed,     color:'#534AB7' },
   ];
+ 
   const max = fd[0].n;
   let html='';
   fd.forEach((f,i)=>{
-    const pct=Math.round(f.n/max*100);
-    html+=`<div class="funnel-row">
+    const pct = Math.round(f.n/max*100);
+    html += `<div class="funnel-row">
       <div class="funnel-label">${f.stage}</div>
       <div class="funnel-outer"><div class="funnel-inner" style="width:${pct}%;background:${f.color};"><span class="funnel-n">${f.n.toLocaleString()}</span></div></div>
       <div class="funnel-pct" style="color:${f.color};">${pct}%</div>
     </div>`;
-    if(i<fd.length-1){
-      const c=Math.round(fd[i+1].n/f.n*100);
-      html+=`<div class="conv-label"><span class="conv-badge">↓ ${c}%</span></div>`;
+    if(i < fd.length-1){
+      const c = Math.round(fd[i+1].n / fd[i].n * 100);
+      html += `<div class="conv-label"><span class="conv-badge">↓ ${c}%</span></div>`;
     }
   });
   el.innerHTML = html;
+ 
   if(cr){
     const pairs=[
-      {lbl:'تواصل → زيارة',  v:Math.round(fd[2].n/fd[1].n*100)+'%', c:'#1D9E75'},
-      {lbl:'زيارة → عرض',    v:Math.round(fd[3].n/fd[2].n*100)+'%', c:'#E8A020'},
-      {lbl:'عرض → تفاوض',   v:Math.round(fd[4].n/fd[3].n*100)+'%', c:'#D85A30'},
-      {lbl:'تفاوض → عقد',   v:Math.round(fd[5].n/fd[4].n*100)+'%', c:'#534AB7'},
-      {lbl:'Lead → Deal',   v:Math.round(fd[5].n/fd[0].n*100)+'%', c:'#0F4C81'},
-      {lbl:'Win Rate',      v:Math.round(fd[5].n/fd[3].n*100)+'%', c:'#1D9E75'},
+      {lbl:'تواصل → زيارة', v:Math.round(fd[2].n/fd[1].n*100)+'%', c:'#1D9E75'},
+      {lbl:'زيارة → عرض',   v:Math.round(fd[3].n/fd[2].n*100)+'%', c:'#E8A020'},
+      {lbl:'عرض → تفاوض',  v:Math.round(fd[4].n/fd[3].n*100)+'%', c:'#D85A30'},
+      {lbl:'تفاوض → عقد',  v:Math.round(fd[5].n/fd[4].n*100)+'%', c:'#534AB7'},
+      {lbl:'Lead → Deal',  v:Math.round(fd[5].n/fd[0].n*100)+'%', c:'#0F4C81'},
+      {lbl:'Win Rate',     v:proposed?Math.round(fd[5].n/fd[3].n*100)+'%':'—', c:'#1D9E75'},
     ];
-    cr.innerHTML=pairs.map(p=>`<div style="background:#f8f9fc;border-radius:8px;padding:10px;text-align:center;border:1px solid var(--border);">
-      <div style="font-size:20px;font-weight:800;color:${p.c};">${p.v}</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:3px;">${p.lbl}</div>
-    </div>`).join('');
+    cr.innerHTML = pairs.map(p=>`
+      <div style="background:#f8f9fc;border-radius:8px;padding:10px;text-align:center;border:1px solid var(--border);">
+        <div style="font-size:20px;font-weight:800;color:${p.c};">${p.v}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">${p.lbl}</div>
+      </div>`).join('');
+  }
+ 
+  // Deal distribution (estimated from total deals)
+  if(dd){
+    const totalDeals = closed;
+    const dist=[
+      {label:'أقل من 10K', n:Math.round(totalDeals*0.19), c:'#0F4C81'},
+      {label:'10K – 25K',  n:Math.round(totalDeals*0.35), c:'#1D9E75'},
+      {label:'25K – 50K',  n:Math.round(totalDeals*0.28), c:'#E8A020'},
+      {label:'50K – 100K', n:Math.round(totalDeals*0.12), c:'#D85A30'},
+      {label:'أكثر من 100K',n:Math.round(totalDeals*0.07),c:'#534AB7'},
+    ];
+    dd.innerHTML = dist.map(d=>`
+      <div style="text-align:center;">
+        <div style="font-size:20px;font-weight:800;color:${d.c};">${d.n}</div>
+        <div style="font-size:10px;color:var(--muted);">${d.label}</div>
+      </div>`).join('');
   }
 }
  
 /* ─────────────── TARGETS ─────────────── */
 const TARGET_DEFS = [
-  {key:'visits',    label:'عدد الزيارات',        unit:'زيارة',    actual:184},
-  {key:'newClients',label:'عملاء جدد',           unit:'عميل',     actual:23},
-  {key:'revenue',   label:'الإيرادات',            unit:'K جنيه',   actual:423, scale:0.001},
-  {key:'avgInvoice',label:'متوسط الفاتورة',       unit:'K جنيه',   actual:18.4, scale:0.001},
-  {key:'convRate',  label:'معدل التحويل',         unit:'%',        actual:12.5},
-  {key:'proposals', label:'عروض الأسعار',         unit:'عرض',      actual:67},
-  {key:'retention', label:'الاحتفاظ بالعملاء',   unit:'%',        actual:87},
-  {key:'saleCycle', label:'دورة البيع',           unit:'يوم',      actual:32, reverse:true},
+  {key:'visits',     label:'عدد الزيارات',       unit:'زيارة', getActual: (tot,m)=> tot.visits },
+  {key:'newClients', label:'عملاء جدد',          unit:'عميل',  getActual: (tot,m)=> Math.round(tot.deals * 0.65) },
+  {key:'revenue',    label:'الإيرادات',           unit:'K جنيه',getActual: (tot,m)=> +(tot.revenue/1000).toFixed(1), targetScale:0.001},
+  {key:'avgInvoice', label:'متوسط الفاتورة',      unit:'K جنيه',getActual: (tot,m)=> tot.deals ? +((tot.revenue/tot.deals)/1000).toFixed(1) : 0, targetScale:0.001},
+  {key:'convRate',   label:'معدل التحويل',        unit:'%',     getActual: (tot,m)=> tot.visits ? +(tot.deals/tot.visits*100).toFixed(1) : 0, noScale:true},
+  {key:'proposals',  label:'عروض الأسعار',        unit:'عرض',   getActual: (tot,m)=> tot.proposals },
+  {key:'retention',  label:'الاحتفاظ بالعملاء',  unit:'%',     getActual: ()=> 87, noScale:true},
+  {key:'saleCycle',  label:'دورة البيع',          unit:'يوم',   getActual: ()=> 32, noScale:true, reverse:true},
 ];
  
 function renderTargets(){
   const el = document.getElementById('targets-list');
+  const redEl  = document.getElementById('red-zone');
+  const greenEl= document.getElementById('green-zone');
   if(!el) return;
+ 
   const m = periodMult();
+  const tot = getTeamTotals(m);
+  const red=[], green=[];
+ 
   el.innerHTML = TARGET_DEFS.map(t=>{
-    const act = t.scale ? t.actual*m*t.scale : (t.key==='convRate'||t.key==='retention'||t.key==='saleCycle'?t.actual:Math.round(t.actual*m));
-    const tgt = t.scale ? targets[t.key]*t.scale : targets[t.key];
+    const act    = t.getActual(tot, m);
+    const tgtRaw = t.targetScale ? targets[t.key] * t.targetScale : targets[t.key];
+    // FIX: Scale non-ratio targets by period multiplier
+    const tgt    = (t.noScale || t.reverse) ? tgtRaw : (t.targetScale ? +(tgtRaw * m).toFixed(1) : Math.round(tgtRaw * m));
+ 
     let pct;
-    if(t.reverse) pct = Math.min(100, Math.round(tgt/act*100));
-    else pct = Math.min(100, Math.round(act/tgt*100));
-    const color = pct>=90?'var(--success)':pct>=70?'var(--warn)':'var(--danger)';
-    const actDisplay = t.scale ? act.toFixed(1) : act;
-    const tgtDisplay = t.scale ? tgt.toFixed(1) : tgt;
+    if(t.reverse) pct = Math.min(100, act>0 ? Math.round(tgt/act*100) : 0);
+    else          pct = tgt>0 ? Math.min(100, Math.round(act/tgt*100)) : 0;
+ 
+    const color = pct>=90 ? 'var(--success)' : pct>=70 ? 'var(--warn)' : 'var(--danger)';
+ 
+    const actDisplay = typeof act === 'number' ? (Number.isInteger(act) ? act : act.toFixed(1)) : act;
+    const tgtDisplay = typeof tgt === 'number' ? (Number.isInteger(tgt) ? tgt : tgt.toFixed(1)) : tgt;
+ 
+    // Populate zones
+    if(pct < 70) red.push(`<div style="color:var(--danger);">⚠ ${t.label}: ${actDisplay} (هدف: ${tgtDisplay})</div>`);
+    else if(pct >= 90) green.push(`<div style="color:var(--success);">✔ ${t.label}: ${actDisplay} (${pct}%)</div>`);
+ 
     return `<div class="target-row">
       <div class="target-label">${t.label}</div>
       <div class="target-bar-bg"><div class="target-bar" style="width:${pct}%;background:${color};"></div></div>
@@ -681,12 +818,16 @@ function renderTargets(){
       <div class="target-vals">${actDisplay} / ${tgtDisplay} ${t.unit}</div>
     </div>`;
   }).join('');
+ 
+  if(redEl)   redEl.innerHTML   = red.length   ? red.join('')   : '<div style="color:var(--success);">✅ لا يوجد مؤشرات في المنطقة الحمراء!</div>';
+  if(greenEl) greenEl.innerHTML = green.length ? green.join('') : '<div style="color:var(--muted);">لا يوجد مؤشرات اجتازت 90% بعد.</div>';
 }
  
 /* ─────────────── CALCULATOR ─────────────── */
 function renderCalcMemberTabs(){
   const el = document.getElementById('calc-member-tabs');
   if(!el) return;
+  // FIX: Rebuild tabs from live team array
   let html = `<button class="mtab team-total ${calcMember===-1?'active':''}" onclick="selectCalcMember(-1,this)">🏢 الفريق كله</button>`;
   team.forEach((r,i)=>{
     html += `<button class="mtab ${calcMember===i?'active':''}" onclick="selectCalcMember(${i},this)">${r.name}</button>`;
@@ -696,85 +837,104 @@ function renderCalcMemberTabs(){
  
 function selectCalcMember(idx, btn){
   calcMember = idx;
-  document.querySelectorAll('.member-tabs .mtab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  // FIX: If btn is null (called programmatically), find the right button
+  if(!btn){
+    const btns = document.querySelectorAll('#calc-member-tabs .mtab');
+    btns.forEach(b=>b.classList.remove('active'));
+    if(idx === -1 && btns[0]) btns[0].classList.add('active');
+    else if(btns[idx+1]) btns[idx+1].classList.add('active');
+  } else {
+    document.querySelectorAll('#calc-member-tabs .mtab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+ 
+  const m = periodMult();
+ 
   if(idx === -1){
-    // team totals
-    const tot = team.reduce((acc,r)=>({
-      visits:acc.visits+r.visits, proposals:acc.proposals+r.proposals,
-      deals:acc.deals+r.deals, revenue:acc.revenue+r.revenue
-    }),{visits:0,proposals:0,deals:0,revenue:0});
-    setCalcInputs(tot.visits, tot.proposals, tot.deals, Math.round(tot.revenue/tot.deals||0));
+    // FIX: Team total uses live data scaled by current period
+    const tot = getTeamTotals(m);
+    const avgInv = tot.deals ? Math.round(tot.revenue / tot.deals) : 0;
+    const existingEst = Math.round(tot.deals * 6); // rough estimate
+    setCalcInputs(tot.visits, tot.proposals, tot.deals, avgInv, existingEst, Math.round(targets.revenue * m));
   } else {
     const r = team[idx];
-    setCalcInputs(r.visits, r.proposals, r.deals, Math.round(r.revenue/(r.deals||1)));
+    // FIX: Scale by current period multiplier
+    const v = Math.round(r.visits    * m);
+    const p = Math.round(r.proposals * m);
+    const d = Math.round(r.deals     * m);
+    const avgInv = r.deals ? Math.round(r.revenue / r.deals) : 0;
+    const existingEst = Math.round(r.deals * 6);
+    const indivTarget = Math.round(targets.revenue / team.length * m);
+    setCalcInputs(v, p, d, avgInv, existingEst, indivTarget);
   }
 }
  
-function setCalcInputs(v,p,d,avg){
-  document.getElementById('c-visits').value = v;
-  document.getElementById('c-proposals').value = p;
-  document.getElementById('c-deals').value = d;
-  document.getElementById('c-avg').value = avg;
+function setCalcInputs(v, p, d, avg, existing, revTarget){
+  document.getElementById('c-visits').value    = v || 0;
+  document.getElementById('c-proposals').value = p || 0;
+  document.getElementById('c-deals').value     = d || 0;
+  document.getElementById('c-avg').value       = avg || 0;
+  document.getElementById('c-existing').value  = existing || 0;
+  document.getElementById('c-rev-target').value= revTarget || 0;
   calcKPI();
 }
  
 function calcKPI(){
-  const v=+document.getElementById('c-visits').value||0;
-  const p=+document.getElementById('c-proposals').value||0;
-  const d=+document.getElementById('c-deals').value||0;
-  const avg=+document.getElementById('c-avg').value||0;
-  const days=+document.getElementById('c-days').value||1;
-  const pipe=+document.getElementById('c-pipeline').value||0;
-  const renewed=+document.getElementById('c-renewed').value||0;
-  const existing=+document.getElementById('c-existing').value||1;
-  const revTarget=+document.getElementById('c-rev-target').value||1;
+  const v          = +document.getElementById('c-visits').value    || 0;
+  const p          = +document.getElementById('c-proposals').value || 0;
+  const d          = +document.getElementById('c-deals').value     || 0;
+  const avg        = +document.getElementById('c-avg').value       || 0;
+  const days       = +document.getElementById('c-days').value      || 1;
+  const pipe       = +document.getElementById('c-pipeline').value  || 0;
+  const renewed    = +document.getElementById('c-renewed').value   || 0;
+  const existing   = +document.getElementById('c-existing').value  || 1;
+  const revTarget  = +document.getElementById('c-rev-target').value|| 1;
  
-  const conv=v?Math.round(d/v*100):0;
-  const win=p?Math.round(d/p*100):0;
-  const rev=d*avg;
-  const daily=+(v/days).toFixed(1);
-  const pipeVal=pipe*avg;
-  const retention=Math.min(100,Math.round(renewed/existing*100));
-  const propRate=v?Math.round(p/v*100):0;
-  const revAch=Math.round(rev/revTarget*100);
+  const conv       = v ? Math.round(d/v*100) : 0;
+  const win        = p ? Math.round(d/p*100) : 0;
+  const rev        = d * avg;
+  const daily      = +(v/days).toFixed(1);
+  const pipeVal    = pipe * avg;
+  const retention  = Math.min(100, Math.round(renewed/existing*100));
+  const propRate   = v ? Math.round(p/v*100) : 0;
+  const revAch     = Math.round(rev/revTarget*100);
+  const avgDeal    = d ? Math.round(rev/d) : 0;
  
-  document.getElementById('r-conv').textContent = v?conv+'%':'—';
-  document.getElementById('r-winrate').textContent = p?win+'%':'—';
-  document.getElementById('r-rev').textContent = rev.toLocaleString();
-  document.getElementById('r-rev-ach').textContent = revTarget?revAch+'%':'—';
-  document.getElementById('r-daily').textContent = daily;
+  document.getElementById('r-conv').textContent      = v ? conv+'%' : '—';
+  document.getElementById('r-winrate').textContent   = p ? win+'%'  : '—';
+  document.getElementById('r-rev').textContent       = rev.toLocaleString();
+  document.getElementById('r-rev-ach').textContent   = revTarget ? revAch+'%' : '—';
+  document.getElementById('r-daily').textContent     = daily;
   document.getElementById('r-pipeline-val').textContent = pipeVal.toLocaleString();
-  document.getElementById('r-retention').textContent = existing?retention+'%':'—';
-  document.getElementById('r-prop-rate').textContent = v?propRate+'%':'—';
-  document.getElementById('r-avg-deal').textContent = d?Math.round(rev/d).toLocaleString():'—';
+  document.getElementById('r-retention').textContent = existing ? retention+'%' : '—';
+  document.getElementById('r-prop-rate').textContent = v ? propRate+'%' : '—';
+  document.getElementById('r-avg-deal').textContent  = d ? avgDeal.toLocaleString() : '—';
  
   // Color result items
-  const items = [
-    {id:'r-conv', val:conv, good:15, ok:10},
-    {id:'r-winrate', val:win, good:30, ok:20},
-    {id:'r-rev-ach', val:revAch, good:90, ok:70},
+  const colorRules = [
+    {id:'r-conv',      val:conv,      good:15, ok:10},
+    {id:'r-winrate',   val:win,       good:30, ok:20},
+    {id:'r-rev-ach',   val:revAch,    good:90, ok:70},
     {id:'r-retention', val:retention, good:85, ok:70},
+    {id:'r-prop-rate', val:propRate,  good:40, ok:25},
   ];
-  items.forEach(it=>{
-    const el=document.getElementById(it.id);
-    if(!el) return;
-    const parent = el.closest('.result-item');
-    if(!parent) return;
-    const color = it.val>=it.good?'#0F6E56':it.val>=it.ok?'#BA7517':'#D85A30';
-    el.style.color = color;
+  colorRules.forEach(it=>{
+    const valEl = document.getElementById(it.id);
+    if(!valEl) return;
+    const color = it.val >= it.good ? '#0F6E56' : it.val >= it.ok ? '#BA7517' : '#D85A30';
+    valEl.style.color = color;
   });
  
   // Insights
-  let ins=[];
-  if(v&&conv<10) ins.push('⚠ معدل التحويل '+conv+'% أقل من 10% → راجع جودة الـ Leads وتأهيل العملاء');
-  else if(v&&conv>=15) ins.push('✅ معدل تحويل ممتاز '+conv+'% — حافظ على نفس الأسلوب');
-  if(p&&win<25) ins.push('⚠ Win Rate '+win+'% منخفض → راجع جودة عروض الأسعار ومهارة الإغلاق');
-  if(daily<3) ins.push('◑ الزيارات اليومية '+daily+' — فكر في تحسين التخطيط الجغرافي');
-  if(propRate&&propRate<30) ins.push('◑ نسبة الزيارات المحولة لعروض '+propRate+'% — راجع مرحلة الاستكشاف');
-  if(revAch&&revAch<80) ins.push('⚠ تحقيق الهدف '+revAch+'% — ارفع متوسط الفاتورة أو عدد الصفقات');
-  if(retention&&retention<80) ins.push('⚠ معدل الاحتفاظ '+retention+'% — ركز على خدمة ما بعد البيع');
-  if(ins.length===0) ins.push('💡 الأرقام ممتازة! ركز على رفع متوسط قيمة الفاتورة لزيادة الإيرادات بدون ضغط على الزيارات.');
+  const ins = [];
+  if(v && conv < 10)  ins.push('⚠ معدل التحويل '+conv+'% أقل من 10% → راجع جودة الـ Leads وتأهيل العملاء');
+  else if(v && conv>=15) ins.push('✅ معدل تحويل ممتاز '+conv+'% — حافظ على نفس الأسلوب');
+  if(p && win < 25)   ins.push('⚠ Win Rate '+win+'% منخفض → راجع جودة عروض الأسعار ومهارة الإغلاق');
+  if(daily < 3)       ins.push('◑ الزيارات اليومية '+daily+' — فكر في تحسين التخطيط الجغرافي');
+  if(propRate && propRate < 30) ins.push('◑ نسبة الزيارات المحولة لعروض '+propRate+'% — راجع مرحلة الاستكشاف');
+  if(revAch && revAch < 80) ins.push('⚠ تحقيق الهدف '+revAch+'% — ارفع متوسط الفاتورة أو عدد الصفقات');
+  if(existing && retention < 80) ins.push('⚠ معدل الاحتفاظ '+retention+'% — ركز على خدمة ما بعد البيع');
+  if(ins.length === 0) ins.push('💡 الأرقام ممتازة! ركز على رفع متوسط قيمة الفاتورة لزيادة الإيرادات بدون ضغط على الزيارات.');
   document.getElementById('insight-box').innerHTML = ins.join('<br>');
 }
  
@@ -784,21 +944,30 @@ function renderMembersList(){
   if(!el) return;
   el.innerHTML = team.map((r,i)=>`
     <div class="member-card" id="mcard-${i}">
-      <div class="color-dot" style="background:${r.color};" onclick="cycleColor(${i})"></div>
-      <div class="member-inputs">
-        <input type="text" value="${r.name}" placeholder="اسم المندوب" oninput="team[${i}].name=this.value">
-        <input type="text" value="${r.role}" placeholder="المسمى الوظيفي" oninput="team[${i}].role=this.value">
-        <input type="number" value="${r.visits}" placeholder="زيارات / شهر" oninput="team[${i}].visits=+this.value">
+      <div class="color-dot" style="background:${r.color};" title="اضغط لتغيير اللون" onclick="cycleColor(${i})"></div>
+      <div style="display:grid;grid-template-columns:2fr 2fr 80px 80px 80px 90px;gap:6px;flex:1;align-items:center;">
+        <input type="text"   value="${escHtml(r.name)}" placeholder="اسم المندوب"    data-idx="${i}" data-field="name"     onchange="updateMemberField(this)">
+        <input type="text"   value="${escHtml(r.role)}" placeholder="المسمى الوظيفي" data-idx="${i}" data-field="role"     onchange="updateMemberField(this)">
+        <input type="number" value="${r.visits}"   placeholder="زيارات"  data-idx="${i}" data-field="visits"    onchange="updateMemberField(this)">
+        <input type="number" value="${r.proposals}"placeholder="عروض"    data-idx="${i}" data-field="proposals" onchange="updateMemberField(this)">
+        <input type="number" value="${r.deals}"    placeholder="صفقات"   data-idx="${i}" data-field="deals"     onchange="updateMemberField(this)">
+        <input type="number" value="${r.revenue}"  placeholder="إيرادات" data-idx="${i}" data-field="revenue"   onchange="updateMemberField(this)">
       </div>
-      <div class="member-inputs">
-        <input type="number" value="${r.proposals}" placeholder="عروض" oninput="team[${i}].proposals=+this.value">
-        <input type="number" value="${r.deals}" placeholder="صفقات" oninput="team[${i}].deals=+this.value">
-        <input type="number" value="${r.revenue}" placeholder="إيرادات" oninput="team[${i}].revenue=+this.value">
-      </div>
-      <button class="remove-btn" onclick="removeMember(${i})">✕</button>
+      <button class="remove-btn" onclick="removeMember(${i})" title="حذف المندوب">✕</button>
     </div>
   `).join('');
   document.getElementById('settings-count').textContent = team.length + ' أعضاء';
+}
+ 
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+ 
+// FIX: Live update team array immediately on field change (no need to re-render the whole list)
+function updateMemberField(input){
+  const i     = +input.dataset.idx;
+  const field = input.dataset.field;
+  const val   = (field==='visits'||field==='proposals'||field==='deals'||field==='revenue')
+                ? +input.value : input.value;
+  if(team[i]) team[i][field] = val;
 }
  
 function cycleColor(i){
@@ -808,35 +977,56 @@ function cycleColor(i){
 }
  
 function addMember(){
-  team.push({name:'مندوب جديد',role:'Sales Rep',color:COLORS[team.length%COLORS.length],visits:30,proposals:12,deals:3,revenue:54000});
+  team.push({
+    name:'مندوب جديد', role:'Sales Rep',
+    color: COLORS[team.length % COLORS.length],
+    visits:30, proposals:12, deals:3, revenue:54000
+  });
   renderMembersList();
 }
  
 function removeMember(i){
-  if(team.length<=1){alert('يجب أن يكون في الفريق عضو واحد على الأقل'); return;}
+  if(team.length <= 1){ showToast('❌ يجب أن يكون في الفريق عضو واحد على الأقل'); return; }
   team.splice(i,1);
   renderMembersList();
 }
  
+// FIX: saveTeam now reads from the DOM inputs one final time, then refreshes ALL sections
 function saveTeam(){
+  // Read any pending values from the inputs (handles edge case where onchange didn't fire)
+  document.querySelectorAll('#members-list .member-card').forEach(card=>{
+    const inputs = card.querySelectorAll('input[data-idx]');
+    inputs.forEach(inp=>{
+      const i     = +inp.dataset.idx;
+      const field = inp.dataset.field;
+      if(!team[i]) return;
+      team[i][field] = (field==='visits'||field==='proposals'||field==='deals'||field==='revenue')
+                       ? +inp.value : inp.value;
+    });
+  });
+ 
+  // Rebuild calc member tabs (team might have changed members)
+  if(calcMember >= team.length) calcMember = -1;
   renderCalcMemberTabs();
+ 
+  // Refresh all sections
   renderTeamMini();
   renderTeamFull();
   renderDashKPIs();
-  document.getElementById('team-count-badge').textContent = team.length+' مندوبين';
-  document.getElementById('team-full-badge').textContent = 'B2B Sales Team — '+team.length+' أعضاء';
-  alert('✅ تم حفظ الفريق وتحديث المنصة!');
+  renderFunnel();
+  renderTargets();
+  renderActivityFeed();
+ 
+  // Refresh calculator with updated data
+  selectCalcMember(calcMember, null);
+ 
+  showToast('✅ تم حفظ الفريق وتحديث جميع الأقسام!');
 }
  
 function resetTeam(){
   if(!confirm('هتعيد تعيين الفريق للبيانات الافتراضية؟')) return;
-  team = [
-    {name:'أحمد حسن',role:'B2B Account Executive',color:'#0F4C81',visits:48,proposals:18,deals:6,revenue:112000},
-    {name:'سارة محمد',role:'Senior Sales Rep',color:'#1D9E75',visits:42,proposals:15,deals:5,revenue:94000},
-    {name:'خالد عبدالله',role:'Sales Rep',color:'#E8A020',visits:36,proposals:14,deals:4,revenue:76000},
-    {name:'محمد علي',role:'Account Manager',color:'#534AB7',visits:30,proposals:11,deals:5,revenue:90000},
-    {name:'نور إبراهيم',role:'Junior Sales Rep',color:'#D85A30',visits:28,proposals:9,deals:3,revenue:51000},
-  ];
+  team = JSON.parse(JSON.stringify(defaultTeam));
+  calcMember = -1;
   renderMembersList();
   saveTeam();
 }
@@ -845,23 +1035,33 @@ function resetTeam(){
 function renderTargetInputs(){
   const el = document.getElementById('target-inputs');
   if(!el) return;
-  el.innerHTML = TARGET_DEFS.map(t=>`
+  const unitMap = {
+    visits:'زيارة', newClients:'عميل', revenue:'جنيه', avgInvoice:'جنيه',
+    convRate:'%', proposals:'عرض', retention:'%', saleCycle:'يوم'
+  };
+  const labelMap = {
+    visits:'عدد الزيارات / شهر', newClients:'عملاء جدد / شهر',
+    revenue:'هدف الإيرادات / شهر', avgInvoice:'متوسط الفاتورة',
+    convRate:'معدل التحويل %', proposals:'عروض الأسعار / شهر',
+    retention:'الاحتفاظ بالعملاء %', saleCycle:'دورة البيع (يوم)'
+  };
+  el.innerHTML = Object.keys(targets).map(k=>`
     <div class="input-block">
-      <label>${t.label} (${t.unit})</label>
-      <input type="number" value="${targets[t.key]}" oninput="targets['${t.key}']=+this.value">
+      <label>${labelMap[k]||k} (${unitMap[k]||''})</label>
+      <input type="number" id="tgt-${k}" value="${targets[k]}">
     </div>
   `).join('');
 }
  
+// FIX: saveTargets reads by ID, not by array index
 function saveTargets(){
-  // re-read all target inputs
-  TARGET_DEFS.forEach(t=>{
-    const inputs = document.querySelectorAll('#target-inputs input');
-    inputs.forEach((inp,i)=>{ targets[TARGET_DEFS[i].key] = +inp.value; });
+  Object.keys(targets).forEach(k=>{
+    const inp = document.getElementById('tgt-'+k);
+    if(inp) targets[k] = +inp.value;
   });
   renderTargets();
   renderDashKPIs();
-  alert('✅ تم حفظ الأهداف!');
+  showToast('✅ تم حفظ الأهداف وتحديث المنصة!');
 }
  
 /* ─────────────── NAV ─────────────── */
@@ -870,11 +1070,11 @@ function showTab(tab, el){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   el.classList.add('active');
-  if(tab==='team') renderTeamFull();
-  if(tab==='funnel') renderFunnel();
-  if(tab==='targets') renderTargets();
-  if(tab==='settings'){ renderMembersList(); renderTargetInputs(); }
-  if(tab==='calculator') renderCalcMemberTabs();
+  if(tab==='team')       renderTeamFull();
+  if(tab==='funnel')     renderFunnel();
+  if(tab==='targets')    renderTargets();
+  if(tab==='settings'){  renderMembersList(); renderTargetInputs(); }
+  if(tab==='calculator'){ renderCalcMemberTabs(); selectCalcMember(calcMember, null); }
 }
  
 /* ─────────────── INIT ─────────────── */
@@ -882,6 +1082,7 @@ renderDashKPIs();
 renderTeamMini();
 renderFunnel();
 renderTargets();
+renderActivityFeed();
 renderCalcMemberTabs();
 calcKPI();
 </script>
