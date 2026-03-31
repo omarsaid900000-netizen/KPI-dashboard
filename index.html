@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة KPI — فرق البيع B2B</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#F0F4F8;direction:rtl;color:#1a1a2e;font-size:14px;}
+:root{
+  --primary:#0F4C81;--accent:#E8A020;--success:#1D9E75;--danger:#D85A30;
+  --warn:#BA7517;--purple:#534AB7;--surface:#fff;--border:rgba(0,0,0,0.1);--muted:#6B7280;
+}
+ 
+/* ── HEADER ── */
+.header{background:var(--primary);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid var(--accent);position:sticky;top:0;z-index:200;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;}
+.logo-text{font-size:15px;font-weight:700;}
+.logo-sub{font-size:10px;opacity:.7;margin-top:1px;}
+ 
+/* ── PERIOD BAR ── */
+.period-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.period-section{display:flex;align-items:center;gap:6px;}
+.period-divider{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.period-label{font-size:11px;font-weight:700;color:var(--muted);}
+.pbtn{background:#f3f4f6;border:1px solid var(--border);color:#444;padding:5px 13px;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.pbtn:hover{background:#e8edf5;border-color:#aac;}
+.pbtn.active{background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700;}
+.pbtn.compare-on{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75;}
+select.period-select{padding:5px 10px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;background:#f3f4f6;color:#444;cursor:pointer;}
+select.period-select:focus{outline:none;border-color:var(--primary);}
+.period-display{font-size:12px;font-weight:700;color:var(--primary);background:#EEF2FF;padding:5px 12px;border-radius:7px;margin-right:auto;}
+ 
+/* ── NAV ── */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.nav-item{padding:11px 15px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;}
+.nav-item.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:700;}
+.nav-item:hover{color:var(--primary);}
+ 
+/* ── CONTENT ── */
+.content{padding:18px 20px;max-width:1200px;margin:0 auto;}
+.section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:11px;}
+ 
+/* ── KPI CARDS ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:18px;}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;position:relative;overflow:hidden;transition:box-shadow .2s;}
+.kpi-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cc,var(--primary));}
+.kpi-label{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.kpi-value{font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:3px;}
+.kpi-change{font-size:11px;font-weight:600;}
+.up{color:var(--success);} .down{color:var(--danger);}
+.kpi-sub{font-size:10px;color:#aaa;margin-top:3px;}
+.kpi-compare{font-size:10px;color:var(--purple);margin-top:2px;font-weight:600;}
+ 
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:14px;}
+.card-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.badge{background:#EEF2FF;color:var(--purple);font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
+.badge-green{background:#E1F5EE;color:#0F6E56;}
+.badge-red{background:#FCEBEB;color:#A32D2D;}
+.badge-amber{background:#FEF3E2;color:var(--warn);}
+ 
+/* ── GRID LAYOUTS ── */
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:14px;}
+.equal-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:800px){.two-col,.equal-col{grid-template-columns:1fr;}}
+ 
+/* ── BARS ── */
+.bar-bg{height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-top:4px;}
+.bar-fill{height:100%;border-radius:3px;transition:width .4s;}
+.funnel-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.funnel-label{font-size:12px;width:115px;flex-shrink:0;text-align:right;}
+.funnel-outer{flex:1;background:#f0f0f0;border-radius:5px;height:27px;overflow:hidden;}
+.funnel-inner{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;transition:width .5s;}
+.funnel-n{font-size:11px;font-weight:700;color:#fff;}
+.funnel-pct{font-size:11px;font-weight:700;width:38px;text-align:left;flex-shrink:0;}
+.conv-label{display:flex;justify-content:flex-end;padding-right:160px;margin-bottom:3px;}
+.conv-badge{background:#FEF3E2;color:var(--warn);font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;}
+.target-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);}
+.target-row:last-child{border-bottom:none;}
+.target-label{font-size:12px;width:135px;flex-shrink:0;text-align:right;}
+.target-bar-bg{flex:1;background:#f0f0f0;border-radius:4px;height:9px;overflow:hidden;}
+.target-bar{height:100%;border-radius:4px;transition:width .5s;}
+.target-pct{font-size:12px;font-weight:800;width:42px;text-align:left;flex-shrink:0;}
+.target-vals{font-size:10px;color:var(--muted);width:95px;text-align:left;flex-shrink:0;}
+ 
+/* ── TEAM ── */
+.rep-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);}
+.rep-row:last-child{border-bottom:none;}
+.avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;}
+.rep-name{font-size:13px;font-weight:700;}
+.rep-role{font-size:10px;color:var(--muted);}
+.team-table{width:100%;border-collapse:collapse;}
+.team-table th{font-size:11px;font-weight:700;color:var(--muted);padding:7px 8px;border-bottom:2px solid var(--border);text-align:center;}
+.team-table th:first-child{text-align:right;}
+.team-table td{font-size:12px;padding:9px 8px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
+.team-table td:first-child{text-align:right;}
+.team-table tr:last-child td{border-bottom:none;}
+ 
+/* ── ACTIVITY ── */
+.activity-item{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.activity-item:last-child{border-bottom:none;}
+.activity-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.activity-text{font-size:12px;flex:1;line-height:1.5;}
+.activity-time{font-size:10px;color:var(--muted);white-space:nowrap;}
+ 
+/* ── CALCULATOR ── */
+.calc-section{margin-bottom:16px;}
+.calc-section-title{font-size:12px;font-weight:700;color:var(--primary);border-right:3px solid var(--primary);padding-right:8px;margin-bottom:10px;}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:700px){.calc-grid{grid-template-columns:1fr 1fr;}}
+.input-block{display:flex;flex-direction:column;gap:3px;}
+.input-block label{font-size:11px;color:var(--muted);font-weight:600;}
+.input-block input,.input-block select{padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:#F8F9FC;color:#1a1a2e;font-family:inherit;width:100%;}
+.input-block input:focus,.input-block select:focus{outline:none;border-color:var(--primary);}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px;}
+@media(max-width:600px){.result-grid{grid-template-columns:1fr 1fr;}}
+.result-item{background:#F0FBF5;border:1px solid #9FE1CB;border-radius:10px;padding:11px;text-align:center;}
+.result-val{font-size:19px;font-weight:800;color:var(--success);}
+.result-lbl{font-size:10px;color:var(--muted);margin-top:2px;}
+.insight-box{background:#EEF2FF;border:1px solid #AFA9EC;border-radius:9px;padding:11px 14px;font-size:12px;color:#3C3489;margin-top:11px;line-height:1.8;}
+.member-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.mtab{background:#f3f4f6;border:1px solid var(--border);color:#555;padding:5px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.mtab:hover{background:#e8edf5;}
+.mtab.active{background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700;}
+.mtab.team-total{background:var(--accent);color:#fff;border-color:var(--accent);}
+ 
+/* ── TEAM MANAGEMENT ── */
+.team-mgmt{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:14px;}
+.member-card{display:flex;align-items:center;gap:10px;padding:9px;background:#f8f9fc;border-radius:9px;margin-bottom:8px;border:1px solid var(--border);}
+.member-card:last-child{margin-bottom:0;}
+.member-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex:1;}
+.member-inputs input{padding:6px 9px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;background:#fff;color:#1a1a2e;width:100%;}
+.member-inputs input:focus{outline:none;border-color:var(--primary);}
+.color-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;cursor:pointer;}
+.remove-btn{background:#FCEBEB;border:none;color:#A32D2D;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.remove-btn:hover{background:#f7c1c1;}
+.add-member-btn{background:#E1F5EE;border:1px dashed #1D9E75;color:#0F6E56;padding:8px;border-radius:9px;width:100%;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700;margin-top:8px;transition:background .15s;}
+.add-member-btn:hover{background:#9FE1CB30;}
+.save-team-btn{background:var(--primary);border:none;color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-family:inherit;font-weight:700;cursor:pointer;margin-top:10px;}
+.save-team-btn:hover{background:#0a3a65;}
+ 
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+ 
+/* ── COMPARE BADGE ── */
+.cmp-val{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700;margin-right:4px;}
+.cmp-up{background:#E1F5EE;color:#0F6E56;}
+.cmp-down{background:#FCEBEB;color:#A32D2D;}
+</style>
+</head>
+<body>
+ 
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">KPI</div>
+    <div>
+      <div class="logo-text">منصة مؤشرات فرق البيع B2B</div>
+      <div class="logo-sub">مدرسة قادة المبيعات — Sales Leaders School</div>
+    </div>
+  </div>
+  <div id="period-display-header" style="font-size:12px;font-weight:700;color:var(--accent);">يناير 2025</div>
+</div>
+ 
+<!-- PERIOD CONTROL BAR -->
+<div class="period-bar">
+  <div class="period-section">
+    <span class="period-label">السنة:</span>
+    <select class="period-select" id="sel-year" onchange="applyPeriod()">
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025" selected>2025</option>
+      <option value="2026">2026</option>
+    </select>
+  </div>
+  <div class="period-divider"></div>
+  <div class="period-section">
+    <button class="pbtn active" id="mode-month" onclick="setMode('month')">شهري</button>
+    <button class="pbtn" id="mode-quarter" onclick="setMode('quarter')">كوارتر</button>
+    <button class="pbtn" id="mode-year" onclick="setMode('year')">سنوي</button>
+  </div>
+  <div class="period-divider"></div>
+  <div class="period-section" id="month-btns">
+    <button class="pbtn active" onclick="setMonth(this,1)">يناير</button>
+    <button class="pbtn" onclick="setMonth(this,2)">فبراير</button>
+    <button class="pbtn" onclick="setMonth(this,3)">مارس</button>
+    <button class="pbtn" onclick="setMonth(this,4)">أبريل</button>
+    <button class="pbtn" onclick="setMonth(this,5)">مايو</button>
+    <button class="pbtn" onclick="setMonth(this,6)">يونيو</button>
+    <button class="pbtn" onclick="setMonth(this,7)">يوليو</button>
+    <button class="pbtn" onclick="setMonth(this,8)">أغسطس</button>
+    <button class="pbtn" onclick="setMonth(this,9)">سبتمبر</button>
+    <button class="pbtn" onclick="setMonth(this,10)">أكتوبر</button>
+    <button class="pbtn" onclick="setMonth(this,11)">نوفمبر</button>
+    <button class="pbtn" onclick="setMonth(this,12)">ديسمبر</button>
+  </div>
+  <div class="period-section" id="quarter-btns" style="display:none;">
+    <button class="pbtn active" onclick="setQuarter(this,1)">Q1 (يناير–مارس)</button>
+    <button class="pbtn" onclick="setQuarter(this,2)">Q2 (أبريل–يونيو)</button>
+    <button class="pbtn" onclick="setQuarter(this,3)">Q3 (يوليو–سبتمبر)</button>
+    <button class="pbtn" onclick="setQuarter(this,4)">Q4 (أكتوبر–ديسمبر)</button>
+  </div>
+  <div class="period-divider"></div>
+  <button class="pbtn" id="compare-btn" onclick="toggleCompare()" title="مقارنة مع الفترة السابقة">⇄ مقارنة</button>
+</div>
+ 
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-item active" onclick="showTab('dashboard',this)">📊 لوحة القيادة</div>
+  <div class="nav-item" onclick="showTab('funnel',this)">🔽 قمع المبيعات</div>
+  <div class="nav-item" onclick="showTab('team',this)">👥 أداء الفريق</div>
+  <div class="nav-item" onclick="showTab('targets',this)">🎯 الأهداف</div>
+  <div class="nav-item" onclick="showTab('calculator',this)">🧮 حاسبة KPI</div>
+  <div class="nav-item" onclick="showTab('settings',this)">⚙️ إعدادات الفريق</div>
+</div>
+ 
+<div class="content">
+ 
+  <!-- DASHBOARD -->
+  <div class="tab-content active" id="tab-dashboard">
+    <div class="section-title" id="dash-period-label">المؤشرات الرئيسية — يناير 2025</div>
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">أداء الفريق — ملخص سريع <span class="badge" id="team-count-badge">5 مندوبين</span></div>
+        <div id="team-mini"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">آخر الأنشطة</div>
+        <div class="activity-item"><div class="activity-dot" style="background:#1D9E75;"></div><div class="activity-text">أحمد حسن أغلق صفقة مع شركة الفاروق للمقاولات — 45,000 جنيه</div><div class="activity-time">منذ ساعة</div></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#0F4C81;"></div><div class="activity-text">سارة محمد أرسلت 3 عروض أسعار لعملاء B2B محتملين</div><div class="activity-time">منذ 3 ساعات</div></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#E8A020;"></div><div class="activity-text">خالد عبدالله زار 5 عملاء في منطقة مدينة نصر</div><div class="activity-time">أمس</div></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#D85A30;"></div><div class="activity-text">رُفض عرض سعر لشركة النيل للتجارة — السبب: السعر</div><div class="activity-time">أمس</div></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#534AB7;"></div><div class="activity-text">محمد علي جدد عقد شركة الأهرام للاستيراد — 60,000 جنيه</div><div class="activity-time">منذ يومين</div></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- FUNNEL -->
+  <div class="tab-content" id="tab-funnel">
+    <div class="section-title" id="funnel-period-label">قمع المبيعات B2B — يناير 2025</div>
+    <div class="equal-col">
+      <div class="card">
+        <div class="card-title">مراحل القمع وحجم الفرص</div>
+        <div id="funnel-bars"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">معدلات التحويل بين المراحل</div>
+        <div id="conv-rates" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">توزيع الصفقات حسب القيمة <span class="badge-amber badge">بالجنيه المصري</span></div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px;">
+        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#0F4C81;">8</div><div style="font-size:10px;color:var(--muted);">أقل من 10K</div></div>
+        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#1D9E75;">15</div><div style="font-size:10px;color:var(--muted);">10K – 25K</div></div>
+        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#E8A020;">12</div><div style="font-size:10px;color:var(--muted);">25K – 50K</div></div>
+        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#D85A30;">5</div><div style="font-size:10px;color:var(--muted);">50K – 100K</div></div>
+        <div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:#534AB7;">3</div><div style="font-size:10px;color:var(--muted);">أكثر من 100K</div></div>
+      </div>
+      <div style="margin-top:11px;height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden;display:flex;">
+        <div style="width:19%;background:#0F4C81;"></div><div style="width:35%;background:#1D9E75;"></div>
+        <div style="width:28%;background:#E8A020;"></div><div style="width:12%;background:#D85A30;"></div>
+        <div style="width:7%;background:#534AB7;"></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- TEAM PERFORMANCE -->
+  <div class="tab-content" id="tab-team">
+    <div class="section-title" id="team-period-label">أداء الفريق الفردي — يناير 2025</div>
+    <div class="card">
+      <div class="card-title">تصنيف وأداء المندوبين <span class="badge" id="team-full-badge">B2B Sales Team</span></div>
+      <div id="team-full"></div>
+    </div>
+  </div>
+ 
+  <!-- TARGETS -->
+  <div class="tab-content" id="tab-targets">
+    <div class="section-title" id="targets-period-label">الأهداف مقابل الإنجاز — يناير 2025</div>
+    <div class="card">
+      <div class="card-title">تقدم KPIs الرئيسية</div>
+      <div id="targets-list"></div>
+    </div>
+    <div class="equal-col" style="margin-top:14px;">
+      <div class="card">
+        <div class="card-title">يحتاج تدخل <span class="badge badge-red">منطقة حمراء</span></div>
+        <div style="font-size:13px;line-height:2.2;">
+          <div style="color:var(--danger);">⚠ معدل التحويل: 12.5% (هدف: 15%)</div>
+          <div style="color:var(--danger);">⚠ عروض الأسعار: 67 (هدف: 80)</div>
+          <div style="color:var(--warn);">◑ متوسط الفاتورة: 18,400 (هدف: 20,000)</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">يسير بشكل جيد <span class="badge badge-green">منطقة خضراء</span></div>
+        <div style="font-size:13px;line-height:2.2;">
+          <div style="color:var(--success);">✔ عدد الزيارات: 184 (92%)</div>
+          <div style="color:var(--success);">✔ عملاء جدد: 23 (92%)</div>
+          <div style="color:var(--success);">✔ الاحتفاظ بالعملاء: 87%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- CALCULATOR -->
+  <div class="tab-content" id="tab-calculator">
+    <div class="section-title">حاسبة KPI الذكية — مخصصة لكل عضو</div>
+ 
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-title">اختر المندوب أو احسب للفريق كله</div>
+      <div class="member-tabs" id="calc-member-tabs"></div>
+    </div>
+ 
+    <div class="card">
+      <div class="calc-section">
+        <div class="calc-section-title">📍 بيانات النشاط</div>
+        <div class="calc-grid">
+          <div class="input-block"><label>عدد الزيارات الميدانية</label><input type="number" id="c-visits" value="100" oninput="calcKPI()"></div>
+          <div class="input-block"><label>عدد عروض الأسعار المُرسلة</label><input type="number" id="c-proposals" value="40" oninput="calcKPI()"></div>
+          <div class="input-block"><label>عدد الصفقات المغلقة</label><input type="number" id="c-deals" value="12" oninput="calcKPI()"></div>
+          <div class="input-block"><label>عدد الأيام في الفترة</label><input type="number" id="c-days" value="30" oninput="calcKPI()"></div>
+          <div class="input-block"><label>فرص مفتوحة في البايبلاين</label><input type="number" id="c-pipeline" value="85" oninput="calcKPI()"></div>
+          <div class="input-block"><label>عملاء تم التجديد معهم</label><input type="number" id="c-renewed" value="18" oninput="calcKPI()"></div>
+        </div>
+      </div>
+      <div class="calc-section">
+        <div class="calc-section-title">💰 بيانات الإيرادات</div>
+        <div class="calc-grid">
+          <div class="input-block"><label>متوسط قيمة الفاتورة (جنيه)</label><input type="number" id="c-avg" value="18000" oninput="calcKPI()"></div>
+          <div class="input-block"><label>إجمالي عملاء موجودين</label><input type="number" id="c-existing" value="42" oninput="calcKPI()"></div>
+          <div class="input-block"><label>الهدف الشهري للإيرادات (جنيه)</label><input type="number" id="c-rev-target" value="250000" oninput="calcKPI()"></div>
+        </div>
+      </div>
+ 
+      <div class="result-grid" id="calc-result">
+        <div class="result-item"><div class="result-val" id="r-conv">—</div><div class="result-lbl">معدل التحويل (زيارة → عقد)</div></div>
+        <div class="result-item"><div class="result-val" id="r-winrate">—</div><div class="result-lbl">Win Rate (عرض → عقد)</div></div>
+        <div class="result-item"><div class="result-val" id="r-rev">—</div><div class="result-lbl">الإيرادات الفعلية (جنيه)</div></div>
+        <div class="result-item"><div class="result-val" id="r-rev-ach">—</div><div class="result-lbl">% تحقيق الهدف</div></div>
+        <div class="result-item"><div class="result-val" id="r-daily">—</div><div class="result-lbl">متوسط الزيارات / يوم</div></div>
+        <div class="result-item"><div class="result-val" id="r-pipeline-val">—</div><div class="result-lbl">قيمة البايبلاين المتوقعة</div></div>
+        <div class="result-item"><div class="result-val" id="r-retention">—</div><div class="result-lbl">معدل الاحتفاظ بالعملاء</div></div>
+        <div class="result-item"><div class="result-val" id="r-prop-rate">—</div><div class="result-lbl">تحويل الزيارات لعروض</div></div>
+        <div class="result-item"><div class="result-val" id="r-avg-deal">—</div><div class="result-lbl">متوسط الفاتورة المحقق</div></div>
+      </div>
+ 
+      <div class="insight-box" id="insight-box">💡 أدخل أرقامك لتظهر التوصيات تلقائياً.</div>
+    </div>
+  </div>
+ 
+  <!-- SETTINGS / TEAM MANAGEMENT -->
+  <div class="tab-content" id="tab-settings">
+    <div class="section-title">إعدادات الفريق — إضافة وتعديل وحذف المندوبين</div>
+    <div class="team-mgmt">
+      <div class="card-title" style="margin-bottom:12px;">أعضاء الفريق <span class="badge" id="settings-count">5 أعضاء</span></div>
+      <div id="members-list"></div>
+      <button class="add-member-btn" onclick="addMember()">+ إضافة مندوب جديد</button>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="save-team-btn" onclick="saveTeam()">💾 حفظ الفريق وتحديث المنصة</button>
+        <button class="save-team-btn" style="background:var(--warn);" onclick="resetTeam()">↺ إعادة تعيين للافتراضي</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">أهداف الفريق — يمكن تعديلها</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="target-inputs"></div>
+      <button class="save-team-btn" style="margin-top:12px;" onclick="saveTargets()">💾 حفظ الأهداف</button>
+    </div>
+  </div>
+ 
+</div><!-- /content -->
+ 
+<script>
+/* ─────────────── STATE ─────────────── */
+const COLORS = ['#0F4C81','#1D9E75','#E8A020','#534AB7','#D85A30','#185FA5','#BA7517','#0F6E56','#993C1D'];
+const MONTH_NAMES = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const QTR_NAMES = ['Q1 (يناير–مارس)','Q2 (أبريل–يونيو)','Q3 (يوليو–سبتمبر)','Q4 (أكتوبر–ديسمبر)'];
+ 
+let state = {
+  mode: 'month', // month | quarter | year
+  year: 2025,
+  month: 1,
+  quarter: 1,
+  compare: false,
+};
+ 
+let team = [
+  { name:'أحمد حسن',   role:'B2B Account Executive', color:'#0F4C81', visits:48, proposals:18, deals:6, revenue:112000 },
+  { name:'سارة محمد',  role:'Senior Sales Rep',       color:'#1D9E75', visits:42, proposals:15, deals:5, revenue:94000 },
+  { name:'خالد عبدالله',role:'Sales Rep',              color:'#E8A020', visits:36, proposals:14, deals:4, revenue:76000 },
+  { name:'محمد علي',   role:'Account Manager',        color:'#534AB7', visits:30, proposals:11, deals:5, revenue:90000 },
+  { name:'نور إبراهيم', role:'Junior Sales Rep',       color:'#D85A30', visits:28, proposals:9,  deals:3, revenue:51000 },
+];
+ 
+let targets = {
+  visits:200, newClients:25, revenue:500000, avgInvoice:20000,
+  convRate:15, proposals:80, retention:90, saleCycle:28
+};
+ 
+let calcMember = -1; // -1 = team total
+ 
+/* ─────────────── PERIOD LOGIC ─────────────── */
+function getPeriodLabel(){
+  if(state.mode==='year') return 'سنة '+state.year;
+  if(state.mode==='quarter') return QTR_NAMES[state.quarter-1]+' '+state.year;
+  return MONTH_NAMES[state.month-1]+' '+state.year;
+}
+ 
+function setMode(m){
+  state.mode = m;
+  ['month','quarter','year'].forEach(x=>{
+    document.getElementById('mode-'+x).classList.toggle('active', x===m);
+  });
+  document.getElementById('month-btns').style.display = m==='month' ? 'flex' : 'none';
+  document.getElementById('quarter-btns').style.display = m==='quarter' ? 'flex' : 'none';
+  applyPeriod();
+}
+ 
+function setMonth(btn, m){
+  state.month = m;
+  document.querySelectorAll('#month-btns .pbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyPeriod();
+}
+ 
+function setQuarter(btn, q){
+  state.quarter = q;
+  document.querySelectorAll('#quarter-btns .pbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyPeriod();
+}
+ 
+function applyPeriod(){
+  state.year = +document.getElementById('sel-year').value;
+  const lbl = getPeriodLabel();
+  document.getElementById('period-display-header').textContent = lbl;
+  ['dash','funnel','team','targets'].forEach(id=>{
+    const el = document.getElementById(id+'-period-label');
+    if(el) el.textContent = (
+      id==='dash' ? 'المؤشرات الرئيسية — ' :
+      id==='funnel' ? 'قمع المبيعات B2B — ' :
+      id==='team' ? 'أداء الفريق الفردي — ' :
+      'الأهداف مقابل الإنجاز — '
+    ) + lbl;
+  });
+  // re-render active sections with slight variance per period
+  renderDashKPIs();
+  renderTeamMini();
+  renderTeamFull();
+  renderFunnel();
+  renderTargets();
+}
+ 
+function toggleCompare(){
+  state.compare = !state.compare;
+  const btn = document.getElementById('compare-btn');
+  btn.classList.toggle('compare-on', state.compare);
+  btn.textContent = state.compare ? '✕ إلغاء المقارنة' : '⇄ مقارنة';
+  renderDashKPIs();
+}
+ 
+/* Period multiplier — adds realistic variance */
+function periodMult(){
+  if(state.mode==='quarter') return 3;
+  if(state.mode==='year') return 12;
+  // month seasonality
+  const mults = [1,0.85,0.95,1.05,1.1,0.9,0.8,0.85,1.0,1.1,1.15,0.95];
+  return mults[(state.month-1)];
+}
+ 
+function prevLabel(){
+  if(state.mode==='month'){
+    const pm = state.month===1 ? 12 : state.month-1;
+    const py = state.month===1 ? state.year-1 : state.year;
+    return MONTH_NAMES[pm-1]+' '+py;
+  }
+  if(state.mode==='quarter'){
+    const pq = state.quarter===1 ? 4 : state.quarter-1;
+    return 'Q'+pq+(state.quarter===1?' '+(state.year-1):' '+state.year);
+  }
+  return 'سنة '+(state.year-1);
+}
+ 
+/* ─────────────── DASHBOARD KPIs ─────────────── */
+const BASE = {visits:184, newClients:23, avgInvoice:18400, convRate:12.5, revenue:423000, retention:87, proposals:67, saleCycle:32};
+ 
+function scaledKPIs(){
+  const m = periodMult();
+  const noise = ()=> 1 + (Math.random()-0.5)*0.08;
+  return {
+    visits: Math.round(BASE.visits * m * noise()),
+    newClients: Math.round(BASE.newClients * m * noise()),
+    avgInvoice: Math.round(BASE.avgInvoice * noise() / 100)*100,
+    convRate: +(BASE.convRate * noise()).toFixed(1),
+    revenue: Math.round(BASE.revenue * m * noise() / 1000)*1000,
+    retention: Math.min(99, +(BASE.retention * noise()).toFixed(1)),
+    proposals: Math.round(BASE.proposals * m * noise()),
+    saleCycle: Math.round(BASE.saleCycle * noise()),
+  };
+}
+ 
+function renderDashKPIs(){
+  const cur = scaledKPIs();
+  const prev = {visits:Math.round(cur.visits*0.88), newClients:Math.round(cur.newClients*0.92),
+    avgInvoice:Math.round(cur.avgInvoice*0.95), convRate:+(cur.convRate*1.02).toFixed(1),
+    revenue:Math.round(cur.revenue*0.91), retention:+(cur.retention*0.99).toFixed(1),
+    proposals:Math.round(cur.proposals*0.97), saleCycle:Math.round(cur.saleCycle*1.1)};
+  const lbl = getPeriodLabel();
+  const prevLbl = prevLabel();
+ 
+  const cards = [
+    {label:'عدد الزيارات الميدانية', val:cur.visits.toLocaleString(), sub:'هدف: '+targets.visits, cc:'#0F4C81',
+      change: pctChange(cur.visits,prev.visits), prevVal:prev.visits, key:'visits'},
+    {label:'عدد العملاء الجدد', val:cur.newClients, sub:'هدف: '+targets.newClients, cc:'#1D9E75',
+      change: pctChange(cur.newClients,prev.newClients), prevVal:prev.newClients, key:'newClients'},
+    {label:'متوسط قيمة الفاتورة', val:cur.avgInvoice.toLocaleString()+' ج', sub:'هدف: '+targets.avgInvoice.toLocaleString(), cc:'#E8A020',
+      change: pctChange(cur.avgInvoice,prev.avgInvoice), prevVal:prev.avgInvoice.toLocaleString()+' ج', key:'avgInvoice'},
+    {label:'معدل التحويل الإجمالي', val:cur.convRate+'%', sub:'زيارة → عقد', cc:'#D85A30',
+      change: pctChange(cur.convRate,prev.convRate), prevVal:prev.convRate+'%', key:'convRate', reverseGood:false},
+    {label:'متوسط دورة البيع', val:cur.saleCycle+' يوم', sub:'من أول تواصل → عقد', cc:'#534AB7',
+      change: pctChange(prev.saleCycle,cur.saleCycle), prevVal:prev.saleCycle+' يوم', key:'saleCycle', reverseGood:true},
+    {label:'إجمالي الإيرادات', val:cur.revenue.toLocaleString()+' ج', sub:'هدف: '+targets.revenue.toLocaleString(), cc:'#0F6E56',
+      change: pctChange(cur.revenue,prev.revenue), prevVal:(prev.revenue/1000).toFixed(0)+'K', key:'revenue'},
+    {label:'معدل الاحتفاظ بالعملاء', val:cur.retention+'%', sub:'العملاء المجددين', cc:'#993C1D',
+      change: pctChange(cur.retention,prev.retention), prevVal:prev.retention+'%', key:'retention'},
+    {label:'عروض الأسعار المُرسلة', val:cur.proposals, sub:'Win Rate: '+Math.round(cur.newClients/cur.proposals*100)+'%', cc:'#185FA5',
+      change: pctChange(cur.proposals,prev.proposals), prevVal:prev.proposals, key:'proposals'},
+  ];
+ 
+  const grid = document.getElementById('kpi-grid');
+  grid.innerHTML = cards.map(c=>{
+    const isUp = c.change >= 0;
+    const goodUp = !c.reverseGood;
+    const isGood = goodUp ? isUp : !isUp;
+    const changeHtml = `<div class="kpi-change ${isGood?'up':'down'}">${isUp?'▲':'▼'} ${Math.abs(c.change)}% ${state.compare?'عن '+prevLbl:''}</div>`;
+    const compareHtml = state.compare ? `<div class="kpi-compare">الفترة السابقة: ${c.prevVal}</div>` : '';
+    return `<div class="kpi-card" style="--cc:${c.cc};">
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value">${c.val}</div>
+      ${changeHtml}
+      <div class="kpi-sub">${c.sub}</div>
+      ${compareHtml}
+    </div>`;
+  }).join('');
+ 
+  document.getElementById('dash-period-label').textContent = 'المؤشرات الرئيسية — '+lbl;
+}
+ 
+function pctChange(cur, prev){
+  if(!prev) return 0;
+  return Math.round((cur-prev)/prev*100);
+}
+ 
+/* ─────────────── TEAM MINI ─────────────── */
+function renderTeamMini(){
+  const el = document.getElementById('team-mini');
+  const badge = document.getElementById('team-count-badge');
+  if(!el) return;
+  const m = periodMult();
+  badge.textContent = team.length + ' مندوبين';
+  const maxRev = Math.max(...team.map(r=>r.revenue));
+  el.innerHTML = team.map(r=>{
+    const rev = Math.round(r.revenue * m / 1000);
+    return `<div class="rep-row">
+      <div class="avatar" style="background:${r.color};">${r.name.charAt(0)}</div>
+      <div style="flex:1;">
+        <div class="rep-name">${r.name}</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(r.revenue/maxRev*100)}%;background:${r.color};"></div></div>
+      </div>
+      <div style="font-size:12px;font-weight:800;color:${r.color};min-width:52px;text-align:left;">${rev}K</div>
+    </div>`;
+  }).join('');
+}
+ 
+/* ─────────────── TEAM FULL ─────────────── */
+function renderTeamFull(){
+  const el = document.getElementById('team-full');
+  if(!el) return;
+  const m = periodMult();
+  el.innerHTML = `<table class="team-table">
+    <thead><tr>
+      <th>المندوب</th><th>زيارات</th><th>عروض</th><th>صفقات</th><th>تحويل%</th><th>Win Rate</th><th>إيرادات (K)</th>
+    </tr></thead>
+    <tbody>
+    ${team.map(r=>{
+      const v=Math.round(r.visits*m), p=Math.round(r.proposals*m), d=Math.round(r.deals*m);
+      const rev=Math.round(r.revenue*m/1000);
+      const conv=v?Math.round(d/v*100):0, win=p?Math.round(d/p*100):0;
+      const cc=conv>=12?'var(--success)':conv>=8?'var(--warn)':'var(--danger)';
+      return `<tr>
+        <td><div style="display:flex;align-items:center;gap:8px;">
+          <div class="avatar" style="background:${r.color};width:30px;height:30px;font-size:11px;">${r.name.charAt(0)}</div>
+          <div><div style="font-weight:700;font-size:12px;">${r.name}</div><div style="font-size:10px;color:var(--muted);">${r.role}</div></div>
+        </div></td>
+        <td><strong>${v}</strong></td><td>${p}</td><td><strong>${d}</strong></td>
+        <td><strong style="color:${cc};">${conv}%</strong></td>
+        <td>${win}%</td>
+        <td><strong style="color:${r.color};">${rev}</strong></td>
+      </tr>`;
+    }).join('')}
+    </tbody></table>`;
+}
+ 
+/* ─────────────── FUNNEL ─────────────── */
+function renderFunnel(){
+  const el = document.getElementById('funnel-bars');
+  const cr = document.getElementById('conv-rates');
+  if(!el) return;
+  const m = periodMult();
+  const fd = [
+    { stage:'عملاء محتملون',  n:Math.round(850*m), color:'#0F4C81' },
+    { stage:'تم التواصل',     n:Math.round(420*m), color:'#185FA5' },
+    { stage:'زيارة / اجتماع', n:Math.round(184*m), color:'#1D9E75' },
+    { stage:'عرض سعر',        n:Math.round(67*m),  color:'#E8A020' },
+    { stage:'تفاوض',          n:Math.round(34*m),  color:'#D85A30' },
+    { stage:'صفقة مغلقة',     n:Math.round(23*m),  color:'#534AB7' },
+  ];
+  const max = fd[0].n;
+  let html='';
+  fd.forEach((f,i)=>{
+    const pct=Math.round(f.n/max*100);
+    html+=`<div class="funnel-row">
+      <div class="funnel-label">${f.stage}</div>
+      <div class="funnel-outer"><div class="funnel-inner" style="width:${pct}%;background:${f.color};"><span class="funnel-n">${f.n.toLocaleString()}</span></div></div>
+      <div class="funnel-pct" style="color:${f.color};">${pct}%</div>
+    </div>`;
+    if(i<fd.length-1){
+      const c=Math.round(fd[i+1].n/f.n*100);
+      html+=`<div class="conv-label"><span class="conv-badge">↓ ${c}%</span></div>`;
+    }
+  });
+  el.innerHTML = html;
+  if(cr){
+    const pairs=[
+      {lbl:'تواصل → زيارة',  v:Math.round(fd[2].n/fd[1].n*100)+'%', c:'#1D9E75'},
+      {lbl:'زيارة → عرض',    v:Math.round(fd[3].n/fd[2].n*100)+'%', c:'#E8A020'},
+      {lbl:'عرض → تفاوض',   v:Math.round(fd[4].n/fd[3].n*100)+'%', c:'#D85A30'},
+      {lbl:'تفاوض → عقد',   v:Math.round(fd[5].n/fd[4].n*100)+'%', c:'#534AB7'},
+      {lbl:'Lead → Deal',   v:Math.round(fd[5].n/fd[0].n*100)+'%', c:'#0F4C81'},
+      {lbl:'Win Rate',      v:Math.round(fd[5].n/fd[3].n*100)+'%', c:'#1D9E75'},
+    ];
+    cr.innerHTML=pairs.map(p=>`<div style="background:#f8f9fc;border-radius:8px;padding:10px;text-align:center;border:1px solid var(--border);">
+      <div style="font-size:20px;font-weight:800;color:${p.c};">${p.v}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px;">${p.lbl}</div>
+    </div>`).join('');
+  }
+}
+ 
+/* ─────────────── TARGETS ─────────────── */
+const TARGET_DEFS = [
+  {key:'visits',    label:'عدد الزيارات',        unit:'زيارة',    actual:184},
+  {key:'newClients',label:'عملاء جدد',           unit:'عميل',     actual:23},
+  {key:'revenue',   label:'الإيرادات',            unit:'K جنيه',   actual:423, scale:0.001},
+  {key:'avgInvoice',label:'متوسط الفاتورة',       unit:'K جنيه',   actual:18.4, scale:0.001},
+  {key:'convRate',  label:'معدل التحويل',         unit:'%',        actual:12.5},
+  {key:'proposals', label:'عروض الأسعار',         unit:'عرض',      actual:67},
+  {key:'retention', label:'الاحتفاظ بالعملاء',   unit:'%',        actual:87},
+  {key:'saleCycle', label:'دورة البيع',           unit:'يوم',      actual:32, reverse:true},
+];
+ 
+function renderTargets(){
+  const el = document.getElementById('targets-list');
+  if(!el) return;
+  const m = periodMult();
+  el.innerHTML = TARGET_DEFS.map(t=>{
+    const act = t.scale ? t.actual*m*t.scale : (t.key==='convRate'||t.key==='retention'||t.key==='saleCycle'?t.actual:Math.round(t.actual*m));
+    const tgt = t.scale ? targets[t.key]*t.scale : targets[t.key];
+    let pct;
+    if(t.reverse) pct = Math.min(100, Math.round(tgt/act*100));
+    else pct = Math.min(100, Math.round(act/tgt*100));
+    const color = pct>=90?'var(--success)':pct>=70?'var(--warn)':'var(--danger)';
+    const actDisplay = t.scale ? act.toFixed(1) : act;
+    const tgtDisplay = t.scale ? tgt.toFixed(1) : tgt;
+    return `<div class="target-row">
+      <div class="target-label">${t.label}</div>
+      <div class="target-bar-bg"><div class="target-bar" style="width:${pct}%;background:${color};"></div></div>
+      <div class="target-pct" style="color:${color};">${pct}%</div>
+      <div class="target-vals">${actDisplay} / ${tgtDisplay} ${t.unit}</div>
+    </div>`;
+  }).join('');
+}
+ 
+/* ─────────────── CALCULATOR ─────────────── */
+function renderCalcMemberTabs(){
+  const el = document.getElementById('calc-member-tabs');
+  if(!el) return;
+  let html = `<button class="mtab team-total ${calcMember===-1?'active':''}" onclick="selectCalcMember(-1,this)">🏢 الفريق كله</button>`;
+  team.forEach((r,i)=>{
+    html += `<button class="mtab ${calcMember===i?'active':''}" onclick="selectCalcMember(${i},this)">${r.name}</button>`;
+  });
+  el.innerHTML = html;
+}
+ 
+function selectCalcMember(idx, btn){
+  calcMember = idx;
+  document.querySelectorAll('.member-tabs .mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(idx === -1){
+    // team totals
+    const tot = team.reduce((acc,r)=>({
+      visits:acc.visits+r.visits, proposals:acc.proposals+r.proposals,
+      deals:acc.deals+r.deals, revenue:acc.revenue+r.revenue
+    }),{visits:0,proposals:0,deals:0,revenue:0});
+    setCalcInputs(tot.visits, tot.proposals, tot.deals, Math.round(tot.revenue/tot.deals||0));
+  } else {
+    const r = team[idx];
+    setCalcInputs(r.visits, r.proposals, r.deals, Math.round(r.revenue/(r.deals||1)));
+  }
+}
+ 
+function setCalcInputs(v,p,d,avg){
+  document.getElementById('c-visits').value = v;
+  document.getElementById('c-proposals').value = p;
+  document.getElementById('c-deals').value = d;
+  document.getElementById('c-avg').value = avg;
+  calcKPI();
+}
+ 
+function calcKPI(){
+  const v=+document.getElementById('c-visits').value||0;
+  const p=+document.getElementById('c-proposals').value||0;
+  const d=+document.getElementById('c-deals').value||0;
+  const avg=+document.getElementById('c-avg').value||0;
+  const days=+document.getElementById('c-days').value||1;
+  const pipe=+document.getElementById('c-pipeline').value||0;
+  const renewed=+document.getElementById('c-renewed').value||0;
+  const existing=+document.getElementById('c-existing').value||1;
+  const revTarget=+document.getElementById('c-rev-target').value||1;
+ 
+  const conv=v?Math.round(d/v*100):0;
+  const win=p?Math.round(d/p*100):0;
+  const rev=d*avg;
+  const daily=+(v/days).toFixed(1);
+  const pipeVal=pipe*avg;
+  const retention=Math.min(100,Math.round(renewed/existing*100));
+  const propRate=v?Math.round(p/v*100):0;
+  const revAch=Math.round(rev/revTarget*100);
+ 
+  document.getElementById('r-conv').textContent = v?conv+'%':'—';
+  document.getElementById('r-winrate').textContent = p?win+'%':'—';
+  document.getElementById('r-rev').textContent = rev.toLocaleString();
+  document.getElementById('r-rev-ach').textContent = revTarget?revAch+'%':'—';
+  document.getElementById('r-daily').textContent = daily;
+  document.getElementById('r-pipeline-val').textContent = pipeVal.toLocaleString();
+  document.getElementById('r-retention').textContent = existing?retention+'%':'—';
+  document.getElementById('r-prop-rate').textContent = v?propRate+'%':'—';
+  document.getElementById('r-avg-deal').textContent = d?Math.round(rev/d).toLocaleString():'—';
+ 
+  // Color result items
+  const items = [
+    {id:'r-conv', val:conv, good:15, ok:10},
+    {id:'r-winrate', val:win, good:30, ok:20},
+    {id:'r-rev-ach', val:revAch, good:90, ok:70},
+    {id:'r-retention', val:retention, good:85, ok:70},
+  ];
+  items.forEach(it=>{
+    const el=document.getElementById(it.id);
+    if(!el) return;
+    const parent = el.closest('.result-item');
+    if(!parent) return;
+    const color = it.val>=it.good?'#0F6E56':it.val>=it.ok?'#BA7517':'#D85A30';
+    el.style.color = color;
+  });
+ 
+  // Insights
+  let ins=[];
+  if(v&&conv<10) ins.push('⚠ معدل التحويل '+conv+'% أقل من 10% → راجع جودة الـ Leads وتأهيل العملاء');
+  else if(v&&conv>=15) ins.push('✅ معدل تحويل ممتاز '+conv+'% — حافظ على نفس الأسلوب');
+  if(p&&win<25) ins.push('⚠ Win Rate '+win+'% منخفض → راجع جودة عروض الأسعار ومهارة الإغلاق');
+  if(daily<3) ins.push('◑ الزيارات اليومية '+daily+' — فكر في تحسين التخطيط الجغرافي');
+  if(propRate&&propRate<30) ins.push('◑ نسبة الزيارات المحولة لعروض '+propRate+'% — راجع مرحلة الاستكشاف');
+  if(revAch&&revAch<80) ins.push('⚠ تحقيق الهدف '+revAch+'% — ارفع متوسط الفاتورة أو عدد الصفقات');
+  if(retention&&retention<80) ins.push('⚠ معدل الاحتفاظ '+retention+'% — ركز على خدمة ما بعد البيع');
+  if(ins.length===0) ins.push('💡 الأرقام ممتازة! ركز على رفع متوسط قيمة الفاتورة لزيادة الإيرادات بدون ضغط على الزيارات.');
+  document.getElementById('insight-box').innerHTML = ins.join('<br>');
+}
+ 
+/* ─────────────── TEAM MANAGEMENT ─────────────── */
+function renderMembersList(){
+  const el = document.getElementById('members-list');
+  if(!el) return;
+  el.innerHTML = team.map((r,i)=>`
+    <div class="member-card" id="mcard-${i}">
+      <div class="color-dot" style="background:${r.color};" onclick="cycleColor(${i})"></div>
+      <div class="member-inputs">
+        <input type="text" value="${r.name}" placeholder="اسم المندوب" oninput="team[${i}].name=this.value">
+        <input type="text" value="${r.role}" placeholder="المسمى الوظيفي" oninput="team[${i}].role=this.value">
+        <input type="number" value="${r.visits}" placeholder="زيارات / شهر" oninput="team[${i}].visits=+this.value">
+      </div>
+      <div class="member-inputs">
+        <input type="number" value="${r.proposals}" placeholder="عروض" oninput="team[${i}].proposals=+this.value">
+        <input type="number" value="${r.deals}" placeholder="صفقات" oninput="team[${i}].deals=+this.value">
+        <input type="number" value="${r.revenue}" placeholder="إيرادات" oninput="team[${i}].revenue=+this.value">
+      </div>
+      <button class="remove-btn" onclick="removeMember(${i})">✕</button>
+    </div>
+  `).join('');
+  document.getElementById('settings-count').textContent = team.length + ' أعضاء';
+}
+ 
+function cycleColor(i){
+  const cur = COLORS.indexOf(team[i].color);
+  team[i].color = COLORS[(cur+1)%COLORS.length];
+  renderMembersList();
+}
+ 
+function addMember(){
+  team.push({name:'مندوب جديد',role:'Sales Rep',color:COLORS[team.length%COLORS.length],visits:30,proposals:12,deals:3,revenue:54000});
+  renderMembersList();
+}
+ 
+function removeMember(i){
+  if(team.length<=1){alert('يجب أن يكون في الفريق عضو واحد على الأقل'); return;}
+  team.splice(i,1);
+  renderMembersList();
+}
+ 
+function saveTeam(){
+  renderCalcMemberTabs();
+  renderTeamMini();
+  renderTeamFull();
+  renderDashKPIs();
+  document.getElementById('team-count-badge').textContent = team.length+' مندوبين';
+  document.getElementById('team-full-badge').textContent = 'B2B Sales Team — '+team.length+' أعضاء';
+  alert('✅ تم حفظ الفريق وتحديث المنصة!');
+}
+ 
+function resetTeam(){
+  if(!confirm('هتعيد تعيين الفريق للبيانات الافتراضية؟')) return;
+  team = [
+    {name:'أحمد حسن',role:'B2B Account Executive',color:'#0F4C81',visits:48,proposals:18,deals:6,revenue:112000},
+    {name:'سارة محمد',role:'Senior Sales Rep',color:'#1D9E75',visits:42,proposals:15,deals:5,revenue:94000},
+    {name:'خالد عبدالله',role:'Sales Rep',color:'#E8A020',visits:36,proposals:14,deals:4,revenue:76000},
+    {name:'محمد علي',role:'Account Manager',color:'#534AB7',visits:30,proposals:11,deals:5,revenue:90000},
+    {name:'نور إبراهيم',role:'Junior Sales Rep',color:'#D85A30',visits:28,proposals:9,deals:3,revenue:51000},
+  ];
+  renderMembersList();
+  saveTeam();
+}
+ 
+/* ─────────────── TARGET INPUTS ─────────────── */
+function renderTargetInputs(){
+  const el = document.getElementById('target-inputs');
+  if(!el) return;
+  el.innerHTML = TARGET_DEFS.map(t=>`
+    <div class="input-block">
+      <label>${t.label} (${t.unit})</label>
+      <input type="number" value="${targets[t.key]}" oninput="targets['${t.key}']=+this.value">
+    </div>
+  `).join('');
+}
+ 
+function saveTargets(){
+  // re-read all target inputs
+  TARGET_DEFS.forEach(t=>{
+    const inputs = document.querySelectorAll('#target-inputs input');
+    inputs.forEach((inp,i)=>{ targets[TARGET_DEFS[i].key] = +inp.value; });
+  });
+  renderTargets();
+  renderDashKPIs();
+  alert('✅ تم حفظ الأهداف!');
+}
+ 
+/* ─────────────── NAV ─────────────── */
+function showTab(tab, el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  el.classList.add('active');
+  if(tab==='team') renderTeamFull();
+  if(tab==='funnel') renderFunnel();
+  if(tab==='targets') renderTargets();
+  if(tab==='settings'){ renderMembersList(); renderTargetInputs(); }
+  if(tab==='calculator') renderCalcMemberTabs();
+}
+ 
+/* ─────────────── INIT ─────────────── */
+renderDashKPIs();
+renderTeamMini();
+renderFunnel();
+renderTargets();
+renderCalcMemberTabs();
+calcKPI();
+</script>
+</body>
+</html>
+ 
